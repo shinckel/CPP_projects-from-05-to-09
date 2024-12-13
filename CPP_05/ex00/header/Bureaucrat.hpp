@@ -17,6 +17,7 @@
 # include <ostream>
 # include <exception>
 # include <string>
+#include <sstream> // concatenate strings
 # include "Colors.hpp"
 
 # define DEFAULT_NAME "Pesto"
