@@ -6,17 +6,12 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 15:35:29 by shinckel          #+#    #+#             */
-/*   Updated: 2024/12/14 02:25:04 by shinckel         ###   ########.fr       */
+/*   Updated: 2024/12/17 17:39:00 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/Bureaucrat.hpp"
 
-// encapsulation: exceptions are specific to this class
-// what() must return const char* 
-// local var are destroyed when function exits
-// so returning a pointer to internal data will result into error
-// static string ensures data persists beyond the scope of the function
 struct Bureaucrat::GradeTooHighException : public std::exception {
     Color::Modifier red;
     Color::Modifier def;
@@ -25,10 +20,9 @@ struct Bureaucrat::GradeTooHighException : public std::exception {
 
     const char* what() const throw() {
         std::ostringstream oss;
-        oss << red << "Grade is too HIGH!" << def; // concatenate strings
-        // Store the message in a static variable to ensure it persists
+        oss << red << "Grade is too HIGH!" << def;
         static std::string static_msg = oss.str();
-        return static_msg.c_str(); // returns a pointer to a null-terminated char array
+        return static_msg.c_str();
     }
 };
 
@@ -46,16 +40,10 @@ struct  Bureaucrat::GradeTooLowException : public std::exception {
     }
 };
 
-// struct  Bureaucrat::GradeTooLowException : public std::exception {
-//   const char* what() const throw() {
-//     return "Grade is too LOW!";
-//   }
-// };
-
 Bureaucrat::Bureaucrat() : _name(DEFAULT_NAME), _grade(DEFAULT_GRADE) {
-  if (grade < 1)
+  if (_grade < 1)
     throw GradeTooHighException();
-  if (grade > 150)
+  if (_grade > 150)
     throw GradeTooLowException();
 }
 
@@ -68,10 +56,7 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name), _grade(grade)
 
 Bureaucrat::~Bureaucrat(void) {}
 
-Bureaucrat::Bureaucrat(const Bureaucrat& clone) : _name(clone.getName()), _grade(clone.getGrade()) {
-  // The grade checks, like the ones done in Bureaucrat constructor, might be unnecessary
-  // as it is a copy of a valid Bureaucrat created before
-}
+Bureaucrat::Bureaucrat(const Bureaucrat& clone) : _name(clone.getName()), _grade(clone.getGrade()) {}
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& clone) {
   _grade = clone.getGrade();
@@ -86,9 +71,6 @@ int Bureaucrat::getGrade(void) const {
   return _grade;
 }
 
-// scope visibility: it is not tied to an instance of the class
-// it is not an instance member, it is a nested type
-// the compiler requires explicit qualification: Bureaucrat::GradeTooHighException()
 void Bureaucrat::increment(void) {
   if (_grade == 1)
     throw Bureaucrat::GradeTooHighException();
@@ -101,7 +83,6 @@ void Bureaucrat::decrement(void) {
   _grade++;
 }
 
-// Overloaded operator<< function
 std::ostream  &operator<<(std::ostream &out, const Bureaucrat &b) {
   Color::Modifier green(Color::FG_GREEN);
   Color::Modifier def(Color::FG_DEFAULT);
@@ -109,3 +90,18 @@ std::ostream  &operator<<(std::ostream &out, const Bureaucrat &b) {
   out << green << "Bureaucrat: " << b.getName() << ", Grade: " << b.getGrade() << def;
   return out; 
 }
+
+// exception is established in Form::beSigned
+void  Bureaucrat::signForm(Form &form) {
+  try {
+    form.beSigned(*this);
+    std::cout << _name + " signed " + form.getName() << std::endl;
+  } catch(const std::exception& e) {
+    std::cout << _name + " couln't sign " + form.getName() + " because " + e.what() << std::endl;
+  }
+}
+
+void    executeForm(AForm const & form) {
+  
+}
+
