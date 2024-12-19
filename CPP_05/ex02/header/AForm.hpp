@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 15:01:11 by shinckel          #+#    #+#             */
-/*   Updated: 2024/12/17 17:40:03 by shinckel         ###   ########.fr       */
+/*   Updated: 2024/12/18 00:32:49 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,8 @@ class AForm {
     // Orthodox Canonical Form
     AForm(std::string name, int sign, int execute);
 		virtual ~AForm();
-    AForm(const Form& clone);
+    AForm(const AForm& clone);
     AForm& operator=(const AForm& clone);
-
-  protected:
-    std::string target;
 
     const   std::string getName() const;
     bool    getSigned() const;
@@ -42,6 +39,9 @@ class AForm {
     struct	NotSigned;
     void    execute(Bureaucrat const & executor) const;
 	  virtual void formExecution() const = 0; // pure virtual function
+
+protected:
+    std::string _target; // used as base for all derived classes
 
   private:
     const std::string _name;

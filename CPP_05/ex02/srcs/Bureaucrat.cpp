@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 15:35:29 by shinckel          #+#    #+#             */
-/*   Updated: 2024/12/17 17:39:00 by shinckel         ###   ########.fr       */
+/*   Updated: 2024/12/18 00:45:30 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ std::ostream  &operator<<(std::ostream &out, const Bureaucrat &b) {
 }
 
 // exception is established in Form::beSigned
-void  Bureaucrat::signForm(Form &form) {
+void  Bureaucrat::signForm(AForm &form) {
   try {
     form.beSigned(*this);
     std::cout << _name + " signed " + form.getName() << std::endl;
@@ -101,7 +101,11 @@ void  Bureaucrat::signForm(Form &form) {
   }
 }
 
-void    executeForm(AForm const & form) {
-  
+void  Bureaucrat::executeForm(AForm const & form) {
+  try {
+    form.execute(*this);
+    std::cout << _name + " executed " + form.getName() << std::endl;
+  } catch(const std::exception& e) {
+    std::cout << _name + " couldn't execute " + form.getName() + " because " + e.what() << std::endl; 
+  }
 }
-

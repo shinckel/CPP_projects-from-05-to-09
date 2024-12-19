@@ -6,7 +6,7 @@
 #    By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/26 21:27:04 by shinckel          #+#    #+#              #
-#    Updated: 2024/12/14 02:37:00 by shinckel         ###   ########.fr        #
+#    Updated: 2024/12/18 00:46:04 by shinckel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,10 @@ NAME = bureaucrat
 
 SRCS =	srcs/main.cpp \
 				srcs/Bureaucrat.cpp \
-				srcs/Form.cpp
+				srcs/AForm.cpp \
+				srcs/PresidentialPardonForm.cpp \
+				srcs/RobotomyRequestForm.cpp \
+				srcs/ShrubberyCreationForm.cpp
 
 CXX = c++
 
@@ -45,6 +48,7 @@ $(NAME): $(OBJS)
 
 clean:
 		@rm -f $(OBJS)
+		@rm -f *_shrubbery
 		@echo "$(RED) Remove object files $(RESET)"
 
 fclean: clean

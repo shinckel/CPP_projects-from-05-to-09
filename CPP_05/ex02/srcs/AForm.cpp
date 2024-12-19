@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 15:01:22 by shinckel          #+#    #+#             */
-/*   Updated: 2024/12/17 17:39:32 by shinckel         ###   ########.fr       */
+/*   Updated: 2024/12/18 00:46:35 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,21 @@ struct  AForm::GradeTooLowException : public std::exception {
         return static_msg.c_str();
     }
 };
-// at its construction, the form is not signed = 0
-// same rules applied to bureaucrat grades are applied here
+
+struct  AForm::NotSigned : public std::exception {
+    Color::Modifier red;
+    Color::Modifier def;
+
+    NotSigned() : red(Color::FG_RED), def(Color::FG_DEFAULT) {}
+
+    const char* what() const throw() {
+        std::ostringstream oss;
+        oss << red << "Form is NOT signed!" << def;
+        static std::string static_msg = oss.str();
+        return static_msg.c_str();
+    }
+};
+
 AForm::AForm(std::string name, int sign, int execute) : _name(name), _signed(0), _gradeToSign(sign), _gradeToExecute(execute) {
   if (_gradeToSign < 1 || _gradeToExecute < 1)
     throw GradeTooHighException();
@@ -87,10 +100,15 @@ std::ostream& operator<<(std::ostream& out, const AForm& form) {
 // it changes the form status to signed if the bureaucrats grade is high enough
 void  AForm::beSigned(const Bureaucrat& b) {
   if(b.getGrade() >= _gradeToSign)
-    throw Form::GradeTooLowException();
+    throw AForm::GradeTooLowException();
   _signed = 1;
 }
 
-void    execute(Bureaucrat const & executor) const {
-  
+// to execute the form, it must obey the grade rules and be signed
+void  AForm::execute(Bureaucrat const & b) const {
+  if(b.getGrade() >= _gradeToExecute)
+    throw AForm::GradeTooLowException();
+  if (!_signed)
+    throw AForm::NotSigned();
+  formExecution(); // formExecution will be overridden by derived class
 }
