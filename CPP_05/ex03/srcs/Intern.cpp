@@ -6,16 +6,18 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:41:29 by shinckel          #+#    #+#             */
-/*   Updated: 2024/12/19 18:24:40 by shinckel         ###   ########.fr       */
+/*   Updated: 2024/12/20 11:43:59 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/Intern.hpp"
 
+// static array of FormTypes structs, maps form names to creation functions
+// Intern::FormType specifies that FormType is a nested type within Intern class
 const Intern::FormType Intern::formTypes[3] = {
-    {"presidential pardon", &Intern::makePPF()},
-    {"robotomy request", &Intern::makeRRF()},
-    {"shrubbery creation", &Intern::makeSCF()}
+    {"presidential pardon", &Intern::makePPF},
+    {"robotomy request", &Intern::makeRRF},
+    {"shrubbery creation", &Intern::makeSCF}
 };
 
 Intern::Intern() {}

@@ -6,7 +6,7 @@
 #    By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/26 21:27:04 by shinckel          #+#    #+#              #
-#    Updated: 2024/12/14 01:57:01 by shinckel         ###   ########.fr        #
+#    Updated: 2024/12/19 18:15:31 by shinckel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ $(OBJDIR)/%.o: srcs/%.cpp
 # Link the object files to create the final executable
 $(NAME): $(OBJS)
 		$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
-		@echo "$(GREEN) Ready to CPP_05-00 $(RESET)"
+		@echo "$(GREEN) Ready to CPP_05-01 $(RESET)"
 
 clean:
 		@rm -f $(OBJS)

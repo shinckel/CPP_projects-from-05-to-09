@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:41:23 by shinckel          #+#    #+#             */
-/*   Updated: 2024/12/19 18:11:47 by shinckel         ###   ########.fr       */
+/*   Updated: 2024/12/20 11:32:19 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include "RobotomyRequestForm.hpp"
 # include "ShrubberyCreationForm.hpp"
 
+// it is designed to create different types of forms based on a given name
+// it uses a struct to map form names to their corresponding creation functions
 class Intern {
   public:
     Intern();
@@ -30,6 +32,7 @@ class Intern {
   private:
     struct FormType {
         std::string name;
+        // pointer to the member function that creates the form
         AForm *(Intern::*create)(std::string target);
     };
 

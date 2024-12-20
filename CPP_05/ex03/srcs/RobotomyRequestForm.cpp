@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:25:29 by shinckel          #+#    #+#             */
-/*   Updated: 2024/12/17 18:25:37 by shinckel         ###   ########.fr       */
+/*   Updated: 2024/12/20 11:27:52 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@ void	RobotomyRequestForm::formExecution(void) const {
 
   std::cout << blue << "** DRILLING NOISES **" << def << std::endl;
   rand() % 2 ?
-    std::cout << blue << _target << "has been robotomized successfully." << def << std::endl :
+    std::cout << blue << _target << " has been robotomized successfully." << def << std::endl :
     std::cout << blue << "Robotomy failed for " << _target << def << std::endl;
 }
