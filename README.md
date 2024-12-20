@@ -44,6 +44,13 @@ catch () {
 | **Abstract class** | `a common interface for a group of related classes` | An abstract class is a class that cannot be instantiated on its own and is intended to be subclassed. It often contains one or more pure virtual functions. Define a common interface for a group of related classes. It provides a base class that other classes can inherit from and implement the abstract methods. **You cannot create an instance of an abstract class directly.** |
 | **Pure virtual function** | `virtual void pureVirtualFunction() = 0;` | Assigning 0 to the function declaration. These functions must be overridden by derived classes. |
 | **Concrete class** | `can be instantiated` `class ConcreteClass : public AbstractClass` | It provides implementations for all its methods, including any inherited pure virtual functions. Do not contain pure virtual functions. |
+| **std::cerr** | `std::cerr` | |
+| **protected** | `class Base { protected: std::string _target; }` | Members declared as protected are accessible within the class itself, by derived classes (subclasses), and by friend classes/functions. However, they are not accessible from outside the class hierarchy. |
+| **private** | | Members declared as private are accessible only within the class itself and by friend classes/functions. They are not accessible from derived classes or from outside the class. |
+| **#include <fstream>** | `file.open((_target + "_shrubbery").c_str(), std::ios::out);` | The library provides classes for reading and writing into files or data streams. `fstream` — class that can read and write to files, `ifstream` — class that can read from files, `ofstream` — a class that can write to files. |
+| **std::string::compare** | `int compare (const string& str) const;` | `if (str1.compare(str2) != 0) std::cout << str1 << " is not " << str2 << '\n';` |
+| **Polymorphism** | `AForm *Intern::makePPF(std::string target) { return new PresidentialPardonForm(target); }` | _Polymorphism:_ Allows you to use a base class pointer to refer to objects of derived classes. _Base Class Pointer:_ `AForm *` is the base class pointer. _Derived Class Object:_ `new PresidentialPardonForm(target)` creates an instance of the derived class. _Dynamic Binding:_ Virtual functions called on the base class pointer will use the derived class's implementation. |
+| **** | | |
 
 ```c++
 class AbstractClass {
@@ -60,6 +67,18 @@ public:
         // Implementation of the pure virtual function
     }
 };
+```
+
+### Copy constructor versus assignment operator
+```c++
+int main(void) {
+	Bureaucrat b("Pesto", 5);
+	Bureaucrat a = b; // copy constructor, "a" wasn't initialized
+	std::cout << a << std::endl; // Bureaucrat: Pesto, Grade: 5
+	Bureaucrat c("Jamie", 32);
+	a = c; // assignment operator, grade is copied to "a" (name is const)
+	std::cout << a << std::endl; // Bureaucrat: Pesto, Grade: 32
+}
 ```
 
 ### References from A Tour of C++ (Stroustrup, 2023)
