@@ -47,11 +47,14 @@ catch () {
 | **std::cerr** | `std::cerr` | |
 | **protected** | `class Base { protected: std::string _target; }` | Members declared as protected are accessible within the class itself, by derived classes (subclasses), and by friend classes/functions. However, they are not accessible from outside the class hierarchy. |
 | **private** | | Members declared as private are accessible only within the class itself and by friend classes/functions. They are not accessible from derived classes or from outside the class. |
-| **#include <fstream>** | `file.open((_target + "_shrubbery").c_str(), std::ios::out);` | The library provides classes for reading and writing into files or data streams. `fstream` — class that can read and write to files, `ifstream` — class that can read from files, `ofstream` — a class that can write to files. |
+| **#include fstream** | `file.open((_target + "_shrubbery").c_str(), std::ios::out);` | The library provides classes for reading and writing into files or data streams. `fstream` — class that can read and write to files, `ifstream` — class that can read from files, `ofstream` — a class that can write to files. |
 | **std::string::compare** | `int compare (const string& str) const;` | `if (str1.compare(str2) != 0) std::cout << str1 << " is not " << str2 << '\n';` |
 | **Polymorphism** | `AForm *Intern::makePPF(std::string target) { return new PresidentialPardonForm(target); }` | _Polymorphism:_ Allows you to use a base class pointer to refer to objects of derived classes. _Base Class Pointer:_ `AForm *` is the base class pointer. _Derived Class Object:_ `new PresidentialPardonForm(target)` creates an instance of the derived class. _Dynamic Binding:_ Virtual functions called on the base class pointer will use the derived class's implementation. |
-| **** | | |
+| **static** | `static void converter(std::string literal)` | The convert method is static, meaning it belongs to the class itself rather than any particular instance of the class. This allows you to call the method without creating an instance of ScalarConverter. Static members of a class are not associated with the objects of the class, and when called, they have no this pointer: read more [here](https://en.cppreference.com/w/cpp/language/static). |
+| **Convert string to double** | `std::strtod(literal.c_str())` `std::atof(literal.c_str())` | Parses the C-string str interpreting its content as a floating point number, returns a double. `atof` is simple and straightforward, no error handling and returns 0.0 on failure. |
+| **Convert string to integer** | `std::atoi(literal.c_str())` | Return integer value corresponding to the contents of str on success. |
 
+### Abstract and Concrete classes
 ```c++
 class AbstractClass {
 public:
