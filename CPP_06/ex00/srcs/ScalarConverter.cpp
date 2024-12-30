@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 03:35:20 by shinckel          #+#    #+#             */
-/*   Updated: 2024/12/30 04:02:53 by shinckel         ###   ########.fr       */
+/*   Updated: 2024/12/30 04:24:01 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,20 +55,23 @@ DataType ScalarConverter::determineDataType(const std::string &literal) {
 
 void ScalarConverter::convertChar(const std::string &literal) {
     char c = literal[0];
+    std::cout << "Debug: char" << std::endl;
     print(c, static_cast<int>(c), static_cast<float>(c), static_cast<double>(c));
 }
 
 void ScalarConverter::convertInt(const std::string &literal) {
-    double doubleValue = ScalarConverter::convertTo<double>(literal);
-    if (doubleValue < std::numeric_limits<int>::min() || doubleValue > std::numeric_limits<int>::max()) {
+    std::cout << "Debug: int" << std::endl;
+    int value = ScalarConverter::convertTo<int>(literal);
+    if (value < std::numeric_limits<int>::min() || value > std::numeric_limits<int>::max()) {
         throw std::out_of_range("out of range");
     }
-    int value = static_cast<int>(doubleValue);
+    // int value = static_cast<int>(doubleValue);
     char c = (value >= std::numeric_limits<char>::min() && value <= std::numeric_limits<char>::max() && std::isprint(static_cast<char>(value))) ? static_cast<char>(value) : 0;
     print(c, value, static_cast<float>(value), static_cast<double>(value));
 }
 
 void ScalarConverter::convertFloat(const std::string &literal) {
+    std::cout << "Debug: float "<< std::endl;
     std::string floatLiteral = literal;
     if (floatLiteral[floatLiteral.length() - 1] == 'f') {
         floatLiteral = floatLiteral.substr(0, floatLiteral.length() - 1);
@@ -82,9 +85,12 @@ void ScalarConverter::convertFloat(const std::string &literal) {
 }
 
 void ScalarConverter::convertDouble(const std::string &literal) {
+    std::cout << "Debug: double" << std::endl;
     double value = ScalarConverter::convertTo<double>(literal);
     char c = (value >= std::numeric_limits<char>::min() && value <= std::numeric_limits<char>::max() && std::isprint(static_cast<char>(value))) ? static_cast<char>(value) : 0;
-    print(c, static_cast<int>(value), static_cast<float>(value), value);
+    // TODO: treat int limits!
+    int i = (value >= std::numeric_limits<int>::min() && value <= std::numeric_limits<int>::max()) ? static_cast<int>(value) : 0;
+    print(c, i, static_cast<float>(value), value);
 }
 
 void ScalarConverter::convertSpecial(const std::string &literal) {
