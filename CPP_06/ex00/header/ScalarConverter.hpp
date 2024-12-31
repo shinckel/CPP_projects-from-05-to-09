@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 12:06:06 by shinckel          #+#    #+#             */
-/*   Updated: 2024/12/30 04:01:44 by shinckel         ###   ########.fr       */
+/*   Updated: 2024/12/31 00:00:13 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ enum DataType {
     INVALID
 };
 
+struct ConversionResult {
+    DataType type;
+    double value;
+};
+
 // The goal is to convert a string representation of a literal
 // into different scalar types and handle edge cases
 // such as non-displayable characters / nan / +inf / -inf
@@ -50,13 +55,9 @@ class ScalarConverter {
 
     // Static methods for conversion
     // they are often used for utility functions that perform common tasks
-    static void convertChar(const std::string &literal);
-    static void convertInt(const std::string &literal);
-    static void convertFloat(const std::string &literal);
-    static void convertDouble(const std::string &literal);
     static void convertSpecial(const std::string &literal);
-    static void print(char c, int i, float f, double d);
-    static DataType determineDataType(const std::string &literal);
+    static void print(double num);
+    static ConversionResult determineDataType(const std::string &literal);
 
     template <typename T>
     static T convertTo(const std::string &literal);

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/30 03:35:20 by shinckel          #+#    #+#             */
-/*   Updated: 2024/12/30 04:24:01 by shinckel         ###   ########.fr       */
+/*   Created: 2024/12/30 17:28:09 by shinckel          #+#    #+#             */
+/*   Updated: 2024/12/31 00:01:08 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,80 +17,50 @@ ScalarConverter::~ScalarConverter() {}
 ScalarConverter::ScalarConverter(const ScalarConverter &clone) { (void)clone; }
 ScalarConverter &ScalarConverter::operator=(const ScalarConverter &clone) { (void)clone; return *this; }
 
-// Function to print the conversion results
-void ScalarConverter::print(char c, int i, float f, double d) {
-    std::cout << "char: ";
-    if (std::isprint(c)) {
-        std::cout << "'" << c << "'" << std::endl;
-    } else {
-        std::cout << "Non displayable" << std::endl;
-    }
-    std::cout << "int: " << i << std::endl;
+void ScalarConverter::print(double num) {
+    (num >= std::numeric_limits<char>::min() && num <= std::numeric_limits<char>::max() && std::isprint(num)) ?
+        std::cout << "char: '" << static_cast<char>(num) << "'" << std::endl :
+        std::cout << "char: non displayable" << std::endl;
+    (num < std::numeric_limits<int>::min() || num > std::numeric_limits<int>::max()) ?
+        std::cout << "int: out of range" << std::endl :
+        std::cout << "int: " << static_cast<int>(num) << std::endl;
     std::cout << std::fixed << std::setprecision(1);
-    std::cout << "float: " << f << "f" << std::endl;
-    std::cout << "double: " << d << std::endl;
+    (num < -std::numeric_limits<float>::max() || num > std::numeric_limits<float>::max()) ?
+        std::cout << "float: out of range" << std::endl :
+        std::cout << "float: " << static_cast<float>(num) << "f" << std::endl;
+    std::cout << "double: " << num << std::endl;
 }
 
-DataType ScalarConverter::determineDataType(const std::string &literal) {
+ConversionResult ScalarConverter::determineDataType(const std::string &literal) {
+    ConversionResult result;
     if (literal == "nan" || literal == "nanf" || literal == "-inff" || literal == "+inff" || literal == "-inf" || literal == "+inf") {
-        return SPECIAL;
+        result.type = SPECIAL;
+        result.value = std::numeric_limits<double>::quiet_NaN();
     } else if (literal.length() == 1 && !std::isdigit(literal[0])) {
-        return CHAR;
+        result.type = CHAR;
+        result.value = literal[0];
     } else if (literal.find('.') != std::string::npos || literal.find('f') != std::string::npos) {
-        return FLOAT;
+        result.type = FLOAT;
+        std::string floatLiteral = literal;
+        if (floatLiteral[floatLiteral.length() - 1] == 'f') {
+            floatLiteral = floatLiteral.substr(0, floatLiteral.length() - 1);
+        }
+        result.value = ScalarConverter::convertTo<double>(floatLiteral);
     } else {
         try {
-            ScalarConverter::convertTo<int>(literal);
-            return INT;
+            result.value = convertTo<int>(literal);
+            result.type = INT;
         } catch (...) {
             try {
-                ScalarConverter::convertTo<double>(literal);
-                return DOUBLE;
+                result.value = convertTo<double>(literal);
+                result.type = DOUBLE;
             } catch (...) {
-                return INVALID;
+                result.type = INVALID;
+                result.value = 0.0;
             }
         }
     }
-}
-
-void ScalarConverter::convertChar(const std::string &literal) {
-    char c = literal[0];
-    std::cout << "Debug: char" << std::endl;
-    print(c, static_cast<int>(c), static_cast<float>(c), static_cast<double>(c));
-}
-
-void ScalarConverter::convertInt(const std::string &literal) {
-    std::cout << "Debug: int" << std::endl;
-    int value = ScalarConverter::convertTo<int>(literal);
-    if (value < std::numeric_limits<int>::min() || value > std::numeric_limits<int>::max()) {
-        throw std::out_of_range("out of range");
-    }
-    // int value = static_cast<int>(doubleValue);
-    char c = (value >= std::numeric_limits<char>::min() && value <= std::numeric_limits<char>::max() && std::isprint(static_cast<char>(value))) ? static_cast<char>(value) : 0;
-    print(c, value, static_cast<float>(value), static_cast<double>(value));
-}
-
-void ScalarConverter::convertFloat(const std::string &literal) {
-    std::cout << "Debug: float "<< std::endl;
-    std::string floatLiteral = literal;
-    if (floatLiteral[floatLiteral.length() - 1] == 'f') {
-        floatLiteral = floatLiteral.substr(0, floatLiteral.length() - 1);
-    }
-    double value = ScalarConverter::convertTo<double>(floatLiteral);
-    if (value < -std::numeric_limits<float>::max() || value > std::numeric_limits<float>::max()) {
-        throw std::out_of_range("out of range");
-    }
-    char c = (value >= std::numeric_limits<char>::min() && value <= std::numeric_limits<char>::max() && std::isprint(static_cast<char>(value))) ? static_cast<char>(value) : 0;
-    print(c, static_cast<int>(value), static_cast<float>(value), value);
-}
-
-void ScalarConverter::convertDouble(const std::string &literal) {
-    std::cout << "Debug: double" << std::endl;
-    double value = ScalarConverter::convertTo<double>(literal);
-    char c = (value >= std::numeric_limits<char>::min() && value <= std::numeric_limits<char>::max() && std::isprint(static_cast<char>(value))) ? static_cast<char>(value) : 0;
-    // TODO: treat int limits!
-    int i = (value >= std::numeric_limits<int>::min() && value <= std::numeric_limits<int>::max()) ? static_cast<int>(value) : 0;
-    print(c, i, static_cast<float>(value), value);
+    return result;
 }
 
 void ScalarConverter::convertSpecial(const std::string &literal) {
@@ -110,32 +80,20 @@ void ScalarConverter::convertSpecial(const std::string &literal) {
 }
 
 void ScalarConverter::converter(const std::string &literal) {
-    DataType type = determineDataType(literal);
-    try {
-        switch (type) {
-            case CHAR:
-                convertChar(literal);
-                break;
-            case INT:
-               convertInt(literal);
-                break;
-            case FLOAT:
-                convertFloat(literal);
-                break;
-            case DOUBLE:
-                convertDouble(literal);
-                break;
-            case SPECIAL:
-                convertSpecial(literal);
-                break;
-            case INVALID:
-            default:
-                std::cout << "invalid argument" << std::endl;
-                break;
-        }
-    } catch (const std::out_of_range& e) {
-        std::cout << "out of range: " << e.what() << std::endl;
-    } catch (const std::invalid_argument& e) {
-        std::cout << "invalid argument: " << e.what() << std::endl;
+    ConversionResult result = determineDataType(literal);
+    switch (result.type) {
+        case CHAR:
+        case INT:
+        case FLOAT:
+        case DOUBLE:
+            print(result.value);
+            break;
+        case SPECIAL:
+            convertSpecial(literal);
+            break;
+        case INVALID:
+        default:
+            std::cout << "invalid argument" << std::endl;
+            break;
     }
 }

@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 12:06:03 by shinckel          #+#    #+#             */
-/*   Updated: 2024/12/30 04:18:21 by shinckel         ###   ########.fr       */
+/*   Updated: 2024/12/30 17:45:52 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,6 @@ int main(int argc, char *argv[]) {
         std::cerr << "Usage: " << argv[0] << " <literal>" << std::endl;
         return 1;
     }
-    try {
-        ScalarConverter::converter(argv[1]);
-    } catch (const std::exception &e) {
-        std::cout << e.what() << std::endl;
-    }
+    ScalarConverter::converter(argv[1]);
     return 0;
 }
