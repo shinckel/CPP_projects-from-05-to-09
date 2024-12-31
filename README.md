@@ -32,6 +32,7 @@ catch () {
 [A Tour of C++ (Second edition)](https://www.stroustrup.com/tour2.html) [Exercises](https://www.stroustrup.com/4thExercises.pdf)<br />
 [The Design of C++ , lecture by Bjarne Stroustrup](https://www.youtube.com/watch?v=69edOm889V4)<br />
 [Bjarne Stroustrup - The Essence of C++](https://www.youtube.com/watch?v=ZXc_z1sNbfA)<br />
+[C Programming Tutorial 21 - Int, Float, and Double Data Types](https://www.youtube.com/watch?v=heULTdxf_yQ)<br />
 
 ## Concepts
 
@@ -51,8 +52,8 @@ catch () {
 | **std::string::compare** | `int compare (const string& str) const;` | `if (str1.compare(str2) != 0) std::cout << str1 << " is not " << str2 << '\n';` |
 | **Polymorphism** | `AForm *Intern::makePPF(std::string target) { return new PresidentialPardonForm(target); }` | _Polymorphism:_ Allows you to use a base class pointer to refer to objects of derived classes. _Base Class Pointer:_ `AForm *` is the base class pointer. _Derived Class Object:_ `new PresidentialPardonForm(target)` creates an instance of the derived class. _Dynamic Binding:_ Virtual functions called on the base class pointer will use the derived class's implementation. |
 | **static** | `static void converter(std::string literal)` | The convert method is static, meaning it belongs to the class itself rather than any particular instance of the class. This allows you to call the method without creating an instance of ScalarConverter. Static members of a class are not associated with the objects of the class, and when called, they have no this pointer: read more [here](https://en.cppreference.com/w/cpp/language/static). |
-| **Convert string to double** | `std::strtod(literal.c_str())` `std::atof(literal.c_str())` | Parses the C-string str interpreting its content as a floating point number, returns a double. `atof` is simple and straightforward, no error handling and returns 0.0 on failure. |
-| **Convert string to integer** | `std::atoi(literal.c_str())` | Return integer value corresponding to the contents of str on success. |
+| **static_cast** | `int value = static_cast<int>(c);` | C++ operator used to perform explicit type conversions. dynamic_cast, const_cast, reinterpret_cast |
+| **double float** | `42.0 42.0f` | Both have a fractional part, floating point. The difference lays in precision: double has much more — 8 bytes (64 bits) versus 4 bytes (32 bits). Doubles take twice as much memory/space. In C `printf("int: %i, double: %f, float: %f", 1, 1111.1111, 1111.1111F)`, double and float output are different. |
 
 ### Abstract and Concrete classes
 ```c++
