@@ -16,6 +16,7 @@ This project was developed for 42 school. For comprehensive information regardin
 - From Module 02 to Module 09, your classes must be designed in the Orthodox Canonical Form, except when explicitely stated otherwise.
 
 0. C++ module 05 - repetition and exceptions, try catch
+1. C++ module 06 - Conversion of scalar types, casting
 
 ```
 try {
@@ -54,6 +55,8 @@ catch () {
 | **static** | `static void converter(std::string literal)` | The convert method is static, meaning it belongs to the class itself rather than any particular instance of the class. This allows you to call the method without creating an instance of ScalarConverter. Static members of a class are not associated with the objects of the class, and when called, they have no this pointer: read more [here](https://en.cppreference.com/w/cpp/language/static). |
 | **static_cast** | `int value = static_cast<int>(c);` | C++ operator used to perform explicit type conversions. dynamic_cast, const_cast, reinterpret_cast |
 | **double float** | `42.0 42.0f` | Both have a fractional part, floating point. The difference lays in precision: double has much more — 8 bytes (64 bits) versus 4 bytes (32 bits). Doubles take twice as much memory/space. In C `printf("int: %i, double: %f, float: %f", 1, 1111.1111, 1111.1111F)`, double and float output are different. |
+| **uintptr_t** | `uintptr_t ptrs_and_ints[100];` | Portability, it is designed to be able to store any pointer value, making it portable across different platforms and architectures. Converting pointers to integers allows you to serialize (convert to a storable or transmittable format) and deserialize (reconstruct the original format) pointers. Especially useful where you have an array of unstructured memory containing both pointers and integers, now you can be assured that you can safely store a pointer in any of the entries. |
+| **reinterpret_cast** | | |
 
 ### Abstract and Concrete classes
 ```c++
