@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 15:01:11 by shinckel          #+#    #+#             */
-/*   Updated: 2024/12/19 17:43:35 by shinckel         ###   ########.fr       */
+/*   Updated: 2025/01/02 08:45:38 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ class AForm {
   public:
     // Orthodox Canonical Form
     AForm(std::string name, int sign, int execute);
-		virtual ~AForm();
+		virtual ~AForm(); // derived class will delete it through a pointer to AForm base class
     AForm(const AForm& clone);
     AForm& operator=(const AForm& clone);
 

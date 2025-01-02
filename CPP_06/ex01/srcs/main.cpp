@@ -6,13 +6,13 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 00:21:21 by shinckel          #+#    #+#             */
-/*   Updated: 2025/01/01 20:28:48 by shinckel         ###   ########.fr       */
+/*   Updated: 2025/01/01 20:29:43 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/Serializer.hpp"
 
-int main() {
+int main(void) {
     Data originalData;
     originalData.id = 1;
     originalData.name = "Pesto";
