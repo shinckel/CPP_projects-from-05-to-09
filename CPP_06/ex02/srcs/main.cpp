@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:25:37 by shinckel          #+#    #+#             */
-/*   Updated: 2025/01/02 15:01:02 by shinckel         ###   ########.fr       */
+/*   Updated: 2025/01/02 15:22:37 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 // implement a base class and derived classes
 // create functions to identify the type of the derived class instances at runtime
-
 int main(void) {
     Base* basePtr = Base::generate();
     Base::identify(basePtr);

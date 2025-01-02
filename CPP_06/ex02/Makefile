@@ -6,11 +6,11 @@
 #    By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/26 21:27:04 by shinckel          #+#    #+#              #
-#    Updated: 2025/01/02 09:26:53 by shinckel         ###   ########.fr        #
+#    Updated: 2025/01/02 15:17:37 by shinckel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = serializer
+NAME = base
 
 SRCS =	srcs/main.cpp \
 				srcs/Base.cpp
