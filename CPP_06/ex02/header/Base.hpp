@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:24:53 by shinckel          #+#    #+#             */
-/*   Updated: 2025/01/02 15:08:12 by shinckel         ###   ########.fr       */
+/*   Updated: 2025/01/02 15:45:54 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,19 @@ class Base {
     template <typename T>
     static bool pointerDynamicCast(Base& p);
 };
+
+// possible syntax, however not compatible to C++98
+// T& t{dynamic_cast<T&>(p)};
+template <typename T>
+bool Base::pointerDynamicCast(Base& p) {
+  try {
+    T& t = dynamic_cast<T&>(p);
+    std::cout << "Dynamic cast pointer: "<< t.getName() << std::endl;
+  } catch(std::exception& e) {
+    // std::cerr << e.what() << std::endl;
+    return false;
+  }
+  return true;
+}
 
 #endif

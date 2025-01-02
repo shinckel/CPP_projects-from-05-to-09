@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:00:46 by shinckel          #+#    #+#             */
-/*   Updated: 2025/01/02 15:09:16 by shinckel         ###   ########.fr       */
+/*   Updated: 2025/01/02 15:46:14 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,20 +44,6 @@ void Base::identify(Base* p) {
     std::cout << "Dynamic cast reference: C" << std::endl;
   else
     std::cout << "unknown type" << std::endl;
-}
-
-// possible syntax, however not compatible to C++98
-// T& t{dynamic_cast<T&>(p)};
-template <typename T>
-bool Base::pointerDynamicCast(Base& p) {
-  try {
-    T& t = dynamic_cast<T&>(p);
-    std::cout << "Dynamic cast pointer: "<< t.getName() << std::endl;
-  } catch(std::exception& e) {
-    // std::cerr << e.what() << std::endl;
-    return false;
-  }
-  return true;
 }
 
 void Base::identify(Base& p) {
