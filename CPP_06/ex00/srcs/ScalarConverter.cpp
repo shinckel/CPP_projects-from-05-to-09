@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 17:28:09 by shinckel          #+#    #+#             */
-/*   Updated: 2024/12/31 00:01:08 by shinckel         ###   ########.fr       */
+/*   Updated: 2025/01/02 12:12:00 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ void ScalarConverter::print(double num) {
         std::cout << "char: non displayable" << std::endl;
     (num < std::numeric_limits<int>::min() || num > std::numeric_limits<int>::max()) ?
         std::cout << "int: out of range" << std::endl :
-        std::cout << "int: " << static_cast<int>(num) << std::endl;
+        std::cout << "int: " << num << std::endl;
     std::cout << std::fixed << std::setprecision(1);
     (num < -std::numeric_limits<float>::max() || num > std::numeric_limits<float>::max()) ?
         std::cout << "float: out of range" << std::endl :
-        std::cout << "float: " << static_cast<float>(num) << "f" << std::endl;
+        std::cout << "float: " << num << "f" << std::endl;
     std::cout << "double: " << num << std::endl;
 }
 
@@ -45,7 +45,7 @@ ConversionResult ScalarConverter::determineDataType(const std::string &literal) 
         if (floatLiteral[floatLiteral.length() - 1] == 'f') {
             floatLiteral = floatLiteral.substr(0, floatLiteral.length() - 1);
         }
-        result.value = ScalarConverter::convertTo<double>(floatLiteral);
+        result.value = ScalarConverter::convertTo<float>(floatLiteral);
     } else {
         try {
             result.value = convertTo<int>(literal);
