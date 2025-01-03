@@ -5,15 +5,26 @@
 #                                                     +:+ +:+         +:+      #
 #    By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/11/26 21:27:04 by shinckel          #+#    #+#              #
-#    Updated: 2025/01/02 16:06:56 by shinckel         ###   ########.fr        #
+#    Created: 2025/01/02 16:58:16 by shinckel          #+#    #+#              #
+#    Updated: 2025/01/02 17:09:21 by shinckel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = base
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/11/26 21:27:04 by shinckel          #+#    #+#              #
+#    Updated: 2025/01/02 16:06:31 by shinckel         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-SRCS =	srcs/main.cpp \
-				srcs/Base.cpp
+NAME = iter
+
+SRCS =	srcs/main.cpp
 
 CXX = c++
 
@@ -40,7 +51,7 @@ $(OBJDIR)/%.o: srcs/%.cpp
 # Link the object files to create the final executable
 $(NAME): $(OBJS)
 		$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
-		@echo "$(GREEN) Ready to CPP_06-02 $(RESET)"
+		@echo "$(GREEN) Ready to CPP_07-01 $(RESET)"
 
 clean:
 		@rm -f $(OBJS)
