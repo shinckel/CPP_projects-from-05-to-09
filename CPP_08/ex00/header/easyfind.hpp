@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 15:29:40 by shinckel          #+#    #+#             */
-/*   Updated: 2025/01/07 10:08:41 by shinckel         ###   ########.fr       */
+/*   Updated: 2025/01/07 12:33:06 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,6 @@ struct zeroOccurence : public std::exception {
 // if no occurence is found, throw exception
 template <typename T>
 typename T::iterator  easyfind(T& container, const int& i) {
-  // std::cout << "Begin: " << container.begin() << std::endl;
-  // std::cout << "End: " << container.end() << std::endl;
-
   typename T::iterator found = std::find(container.begin(), container.end(), i);
   if (found == container.end())
     throw zeroOccurence();

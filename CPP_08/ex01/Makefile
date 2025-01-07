@@ -6,13 +6,14 @@
 #    By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/26 21:27:04 by shinckel          #+#    #+#              #
-#    Updated: 2025/01/07 11:14:38 by shinckel         ###   ########.fr        #
+#    Updated: 2025/01/07 11:15:46 by shinckel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = easyfind
+NAME = span
 
-SRCS =	srcs/main.cpp
+SRCS =	srcs/main.cpp \
+				srcs/Span.cpp
 
 CXX = c++
 
@@ -39,7 +40,7 @@ $(OBJDIR)/%.o: srcs/%.cpp
 # Link the object files to create the final executable
 $(NAME): $(OBJS)
 		$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
-		@echo "$(GREEN) Ready to CPP_08-00 $(RESET)"
+		@echo "$(GREEN) Ready to CPP_08-01 $(RESET)"
 
 clean:
 		@rm -f $(OBJS)
