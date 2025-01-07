@@ -6,11 +6,11 @@
 #    By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/26 21:27:04 by shinckel          #+#    #+#              #
-#    Updated: 2025/01/05 20:23:43 by shinckel         ###   ########.fr        #
+#    Updated: 2025/01/07 09:23:12 by shinckel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = iter
+NAME = find
 
 SRCS =	srcs/main.cpp
 

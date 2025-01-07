@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 14:02:53 by shinckel          #+#    #+#             */
-/*   Updated: 2025/01/05 19:58:56 by shinckel         ###   ########.fr       */
+/*   Updated: 2025/01/06 15:53:45 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 
 # include <iostream>
 # include <stdlib.h>
-
 
 template <class T>
 class Array {

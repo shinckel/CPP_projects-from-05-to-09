@@ -16,7 +16,9 @@ This project was developed for 42 school. For comprehensive information regardin
 - From Module 02 to Module 09, your classes must be designed in the Orthodox Canonical Form, except when explicitely stated otherwise.
 
 0. C++ module 05 - repetition and exceptions, try catch
-1. C++ module 06 - Conversion of scalar types, casting
+1. C++ module 06 - conversion of scalar types, casting
+3. C++ module 07 - templates
+4. C++ module 08 — templated containers, iterators, algorithms
 
 ```c++
 try {
@@ -151,11 +153,11 @@ public:
 ```c++
 int main(void) {
   Bureaucrat b("Pesto", 5);
-  Bureaucrat a = b; // copy constructor, "a" wasn't initialized
-  std::cout << a << std::endl; // Bureaucrat: Pesto, Grade: 5
+  Bureaucrat a = b; // copy constructor, "a" wasn't initialized;
+  std::cout << a << std::endl; // Bureaucrat: Pesto, Grade: 5;
   Bureaucrat c("Jamie", 32);
-  a = c; // assignment operator, grade is copied to "a" (name is const)
-  std::cout << a << std::endl; // Bureaucrat: Pesto, Grade: 32
+  a = c; // assignment operator, grade is copied to "a" (name is const);
+  std::cout << a << std::endl; // Bureaucrat: Pesto, Grade: 32;
 }
 ```
 
@@ -163,12 +165,39 @@ int main(void) {
 ```c++
 class Vector {
 public:
-  Vector(int s) :elem{new double[s]}, sz{s} {} // construct a vector
-  double& operator[](int i) {return elem[i];} // element access: subscripting
+  Vector(int s) :elem{new double[s]}, sz{s} {} // construct a vector;
+  double& operator[](int i) {return elem[i];} // element access: subscripting;
   int size() {return sz;}
 private:
-  double* elem; // pointer to the elements
-  int sz; // the number of elements 
+  double* elem; // pointer to the elements;
+  int sz; // the number of elements;
+}
+```
+
+### Vector — A Tour of C++ page 159 (physical book)
+```c++
+template<typename T>
+class Vector {
+  allocator<T> alloc; // standard library allocator of space for Ts;
+  T* elem; // pointer to first element;
+  T* space; // pointer to first unused (and uninitialized) slot;
+  T* last; // pointer to last slot;
+
+public:
+  int size() const { return space-elem; } // number of elements;
+  int capacity() const { return last-elem; } // number of slots available for elements;
+  void reserve(int newsz); // increase capacity() to newsz... make room for elements;
+  void push_back(const T& t); // copy t into Vector;
+  void push_back(T& &t); // move t into Vector;
+};
+
+template<typename T>
+void Vector<T>::push_back(const T& t) {
+  if(capacity() >= size()) { // make sure we have space for t
+    reserve(size() == 0 ? 8 : 2 * size()) // double the capacity
+  }
+  construct_at(space, t); // initialize *space to t ("place t at space")
+  ++space;
 }
 ```
 
@@ -180,6 +209,7 @@ private:
 [C Programming Tutorial 21 - Int, Float, and Double Data Types](https://www.youtube.com/watch?v=heULTdxf_yQ)<br />
 [Casting in C++](https://www.youtube.com/watch?v=pWZS1MtxI-A)<br />
 [A Tour of C++, page 39 — static_cast, page 161 — 14.2.4 Casts](https://elhacker.info/manuales/Lenguajes%20de%20Programacion/C++/A%20Tour%20of%20C++%20-%20Bjarne%20Stroustrup%20(Addison-Wesley,%202014)(193p).pdf)
+[Dynamic Arrays in C++ (std::vector)](https://www.youtube.com/watch?v=HcESuwmlHEY)<br />
 
 ## Concepts
 
@@ -202,3 +232,13 @@ private:
 | **named casts** | `int value = static_cast<int>(c);` | C++ operator used to perform explicit type conversions. There are four different types: `static_cast` it is not adding new functionalities to C — syntax sugar + compile time checks, `dynamic_cast` performs checks and may return NULL if convertion wasn't successful — runtime checking, `const_cast` for casting away const, `reinterpret_cast` reinterprets memory as something else — read more [here](https://en.cppreference.com/w/cpp/language/reinterpret_cast). **Easily search for casting in your codebase**. |
 | **double float** | `42.0 42.0f` | Both have a fractional part, floating point. The difference lays in precision: double has much more — 8 bytes (64 bits) versus 4 bytes (32 bits). Doubles take twice as much memory/space. In C `printf("int: %i, double: %f, float: %f", 1, 1111.1111, 1111.1111F)`, double and float output are different. |
 | **uintptr_t** | `uintptr_t ptrs_and_ints[100];` | Portability, it is designed to be able to store any pointer value, making it portable across different platforms and architectures. Converting pointers to integers allows you to serialize (convert to a storable or transmittable format) and deserialize (reconstruct the original format) pointers. Especially useful where you have an array of unstructured memory containing both pointers and integers, now you can be assured that you can safely store a pointer in any of the entries. |
+| **range-for loop** | | |
+| **Containers** | `vector, list, forward list, map, unordered map` | A Class with the main purpose of holding objects is commonly called a container. **Standard template library:** a library of container types, the whole library is templated — the data type is up to you to decide, meaning, the user must provide the data type for the data structure. `std::vector` dynamic array that can grow in size, `std::list` doubly linked list, `std::deque` double ended queue, `std::set` an ordered set of unique elements, `std::map` ordered associative container that stores key-value pairs. |
+| **vector** | | A sequence of elements of a given type, store contiguously in memory. Meaning: it is an **dynamic array**, possible to resize everytime you add a new element. When we define a vector, we give it an initial size (initial number of elements). `vector<int> v1 = {1, 2, 3, 4};` `vector<string> v2; // size is 0` `vector<Shape*> v3(23); // size is 23, initial element is NULL` `vector<double> v4(32, 9.9); // size is 32, initial element is 9.9`. One of the most useful operations on a vector is `push_back()`, which adds a new element at the end increasing its size by one. _Reminder: iterate/use reference as argument for avoiding multiple vector copies._ |
+| **iterator** | `typename T::iterator` | Object to traverse a container, uniform way to access elements in different types of containers even if the underlying data structures are different. Flexibility: Iterators can traverse containers that do not support random access (e.g., linked lists). Provide bounds checking that direct indexing may not. |
+
+
+However, using them is precisely the goal of this Module. You are allowed to
+use the STL. Yes, you can use the Containers (vector/list/map/and so forth) and the
+Algorithms (defined in header <algorithm>). Moreover, you should use them as much
+as you can. Thus, do your best to apply them wherever it’s appropriate.
