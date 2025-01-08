@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 10:53:41 by shinckel          #+#    #+#             */
-/*   Updated: 2025/01/07 18:43:19 by shinckel         ###   ########.fr       */
+/*   Updated: 2025/01/08 22:16:35 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int main(void) {
   std::cout << "———————————————————————\n" << std::endl;
   std::cout << "Copy constructor: " << v5 << std::endl;
   v5 = v;
-  std::cout << "Assignment operator: " << v5 << std::endl;
-
+  std::cout << "Assignment operator v5: " << v5 << std::endl;
+  std::cout << "Source vector v2 doesn't change: " << v2 << std::endl;
   return 0;
 }
