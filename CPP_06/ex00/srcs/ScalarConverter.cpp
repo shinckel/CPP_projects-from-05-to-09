@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 17:28:09 by shinckel          #+#    #+#             */
-/*   Updated: 2025/01/02 12:12:00 by shinckel         ###   ########.fr       */
+/*   Updated: 2025/01/08 22:07:28 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void ScalarConverter::print(double num) {
     std::cout << "double: " << num << std::endl;
 }
 
-ConversionResult ScalarConverter::determineDataType(const std::string &literal) {
+// if the character '.' and 'f' is not found, find returns std::string::npos... otherwise, return substr index position
+ScalarConverter::ConversionResult ScalarConverter::determineDataType(const std::string &literal) {
     ConversionResult result;
     if (literal == "nan" || literal == "nanf" || literal == "-inff" || literal == "+inff" || literal == "-inf" || literal == "+inf") {
         result.type = SPECIAL;
@@ -39,13 +40,16 @@ ConversionResult ScalarConverter::determineDataType(const std::string &literal) 
     } else if (literal.length() == 1 && !std::isdigit(literal[0])) {
         result.type = CHAR;
         result.value = literal[0];
-    } else if (literal.find('.') != std::string::npos || literal.find('f') != std::string::npos) {
-        result.type = FLOAT;
+    } else if (literal.find('.') != std::string::npos && literal.find('f') != std::string::npos && (literal.find('f') == literal.size() - 1)) {
         std::string floatLiteral = literal;
-        if (floatLiteral[floatLiteral.length() - 1] == 'f') {
+        if (floatLiteral[floatLiteral.length() - 1] == 'f')
             floatLiteral = floatLiteral.substr(0, floatLiteral.length() - 1);
+        try {
+            result.value = ScalarConverter::convertTo<float>(floatLiteral);
+            result.type = FLOAT;
+        } catch(...) {
+            return determineDataType(floatLiteral); // recursivelly, check again now trying other number formats
         }
-        result.value = ScalarConverter::convertTo<float>(floatLiteral);
     } else {
         try {
             result.value = convertTo<int>(literal);

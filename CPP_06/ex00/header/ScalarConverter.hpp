@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 12:06:06 by shinckel          #+#    #+#             */
-/*   Updated: 2024/12/31 00:00:13 by shinckel         ###   ########.fr       */
+/*   Updated: 2025/01/08 21:42:56 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,6 @@
 # include <cmath>
 # include <cctype>
 # include <stdexcept>
-
-enum DataType {
-    CHAR,
-    INT,
-    FLOAT,
-    DOUBLE,
-    SPECIAL,
-    INVALID
-};
-
-struct ConversionResult {
-    DataType type;
-    double value;
-};
 
 // The goal is to convert a string representation of a literal
 // into different scalar types and handle edge cases
@@ -53,26 +39,37 @@ class ScalarConverter {
     ScalarConverter(const ScalarConverter &clone);
     ScalarConverter &operator=(const ScalarConverter &clone);
 
+    enum DataType {
+        CHAR,
+        INT,
+        FLOAT,
+        DOUBLE,
+        SPECIAL,
+        INVALID
+    };
+
+    struct ConversionResult {
+        DataType type;
+        double value;
+    };
+
     // Static methods for conversion
     // they are often used for utility functions that perform common tasks
     static void convertSpecial(const std::string &literal);
     static void print(double num);
     static ConversionResult determineDataType(const std::string &literal);
 
+    // avoid writing separate conversion functions for each data type
     template <typename T>
-    static T convertTo(const std::string &literal);
-};
-
-// avoid writing separate conversion functions for each data type
-template <typename T>
-T ScalarConverter::convertTo(const std::string &literal) {
-    std::stringstream ss(literal);
-    T value;
-    ss >> value;
-    if (ss.fail() || !ss.eof()) {
-        throw std::invalid_argument("invalid argument");
+    static T convertTo(const std::string &literal) {
+        std::stringstream ss(literal);
+        T value;
+        ss >> value;
+        if (ss.fail() || !ss.eof()) {
+            throw std::invalid_argument("invalid argument");
+        }
+        return value;
     }
-    return value;
-}
+};
 
 #endif
