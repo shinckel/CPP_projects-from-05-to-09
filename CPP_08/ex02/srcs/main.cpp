@@ -60,22 +60,25 @@ int main(void) {
   // std::stack has no push_back and front
   // it only provides push, top and pop for modifying the stack
   MutantStack<int> m;
-  m.push(100);
-  m.push(200);
-  m.push(300);
-  m.push(50);
   m.push(10);
+  m.push(20);
+  m.push(30);
+  m.push(5);
+  m.push(2);
+  m.push(0);
 
   // render from bottom to the top, accessing elems in the order they are stored
   // 100 — 200 — 300 — 50 — 10
   for (MutantStack<int>::iterator it = m.begin(); it != m.end(); ++it)
-    std::cout << *it << std::endl;
+    std::cout << *it << " ";
+  std::cout << std::endl;
 
   std::cout << "Top element: " << m.top() << std::endl;
   m.pop();
   std::cout << "Top element after pop: " << m.top() << std::endl;
 
   for (MutantStack<int>::reverse_iterator it2 = m.rbegin(); it2 != m.rend(); ++it2)
-    std::cout << *it2 << std::endl;
+    std::cout << *it2 << " ";
+  std::cout << std::endl;
   return 0;
 }
