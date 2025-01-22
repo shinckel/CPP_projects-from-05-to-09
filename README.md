@@ -18,7 +18,8 @@ This project was developed for 42 school. For comprehensive information regardin
 0. C++ module 05 - repetition and exceptions, try catch
 1. C++ module 06 - conversion of scalar types, casting
 3. C++ module 07 - templates
-4. C++ module 08 — templated containers, iterators, algorithms
+4. C++ module 08 — templated containers, iterators, algorithms, extending the functionality of the standard library
+5. C++ module 09 — 
 
 ```c++
 try {
@@ -211,6 +212,7 @@ void Vector<T>::push_back(const T& t) {
 [A Tour of C++, page 39 — static_cast, page 161 — 14.2.4 Casts](https://elhacker.info/manuales/Lenguajes%20de%20Programacion/C++/A%20Tour%20of%20C++%20-%20Bjarne%20Stroustrup%20(Addison-Wesley,%202014)(193p).pdf)
 [Dynamic Arrays in C++ (std::vector)](https://www.youtube.com/watch?v=HcESuwmlHEY)<br />
 [Stacks and Queues Shopping List Exercise - C++ Tutorial 30](https://www.youtube.com/watch?v=6Ea980Vg8UA)<br />
+[Scott Meyers - Effective Modern C++ part 1](https://www.youtube.com/watch?v=fhM24zs1MFA&list=PLmxXlAVb5hkyq5njldMEPYdOqTAQPLChR)<br />
 
 ## Concepts
 
@@ -234,13 +236,10 @@ void Vector<T>::push_back(const T& t) {
 | **double float** | `42.0 42.0f` | Both have a fractional part, floating point. The difference lays in precision: double has much more — 8 bytes (64 bits) versus 4 bytes (32 bits). Doubles take twice as much memory/space. In C `printf("int: %i, double: %f, float: %f", 1, 1111.1111, 1111.1111F)`, double and float output are different. |
 | **uintptr_t** | `uintptr_t ptrs_and_ints[100];` | Portability, it is designed to be able to store any pointer value, making it portable across different platforms and architectures. Converting pointers to integers allows you to serialize (convert to a storable or transmittable format) and deserialize (reconstruct the original format) pointers. Especially useful where you have an array of unstructured memory containing both pointers and integers, now you can be assured that you can safely store a pointer in any of the entries. |
 | **range-for loop** | | |
-<<<<<<< Updated upstream
 | **Containers** | `vector, list, forward list, map, unordered map` | A Class with the main purpose of holding objects is commonly called a container. **Standard template library:** a library of container types, the whole library is templated — the data type is up to you to decide, meaning, the user must provide the data type for the data structure. `std::vector` dynamic array that can grow in size, `std::list` doubly linked list, `std::deque` double ended queue, `std::set` an ordered set of unique elements, `std::map` ordered associative container that stores key-value pairs. ![Screenshot 2025-01-21 at 15 51 28](https://github.com/user-attachments/assets/05b3e26d-33ef-4c1e-8247-4575b132b9e2) |
-=======
-| **Containers** | `vector, list, forward list, map, unordered map` | A Class with the main purpose of holding objects is commonly called a container. **Standard template library:** a library of container types, the whole library is templated — the data type is up to you to decide, meaning, the user must provide the data type for the data structure. `std::vector` dynamic array that can grow in size, `std::list` doubly linked list, `std::deque` double ended queue, `std::set` an ordered set of unique elements, `std::map` ordered associative container that stores key-value pairs. /Users/hincksof/Desktop/Screenshot 2025-01-21 at 15.49.00.png |
->>>>>>> Stashed changes
 | **vector** | `vector<double> v4(32, 9.9);` | A sequence of elements of a given type, store contiguously in memory. Meaning: it is an **dynamic array**, possible to resize everytime you add a new element. When we define a vector, we give it an initial size (initial number of elements). `vector<int> v1 = {1, 2, 3, 4};` `vector<string> v2; // size is 0` `vector<Shape*> v3(23); // size is 23, initial element is NULL` `vector<double> v4(32, 9.9); // size is 32, initial element is 9.9`. One of the most useful operations on a vector is `push_back()`, which adds a new element at the end increasing its size by one. _Reminder: iterate/use reference as argument for avoiding multiple vector copies._ **VECTOR MANAGES ITS OWN MEMORY, NO NEW OR DELETE**. |
 | **iterator** | `typename T::iterator` | Object to traverse a container, uniform way to access elements in different types of containers even if the underlying data structures are different. Flexibility: Iterators can traverse containers that do not support random access (e.g., linked lists). Provide bounds checking that direct indexing may not. |
 | **sort** | `std::sort algorithm` | Sort with random access containers, e.g.: std::vector: `std::sort(vec.begin(), vec.end());`. Sort member function with std::list: `lst.sort()`. |
 | **De Morgan's laws** | `not (A or B) = (not A) and (not B)` | Read more [here](https://en.wikipedia.org/wiki/De_Morgan%27s_laws). |
-| **container adaptors** | `stack<T>` | The standard library provides container adaptors `queue<T>`, `stack<T>`, and `priority_queue<T>`. Read more [here](https://en.cppreference.com/w/cpp/container/stack/stack). |
+| **container adaptors** | `stack<T>` | The standard library provides container adaptors `queue<T>`, `stack<T>`, and `priority_queue<T>`. A container adapter is a class template in the C++ Standard Library that provides a specific interface for a container by using another container type as its underlying storage. The container adapter modifies or restricts the interface of the underlying container to provide a different abstraction. Read more [here](https://en.cppreference.com/w/cpp/container/stack/stack). **Abstraction:** `std::stack` provides a stack interface (LIFO - Last In, First Out) by restricting the operations of the underlying container. It only exposes push, pop, top, and size-related operations, hiding other operations of the underlying container (by default it is a `std::deque` Double Ended Queue... data structure in which you can append in either side, very similar to a vector). |
+| **LIFO** | `Last In, First Out` |  |

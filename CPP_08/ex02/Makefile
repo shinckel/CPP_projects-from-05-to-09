@@ -12,9 +12,7 @@
 
 NAME = mutantstack
 
-SRCS =	srcs/main.cpp \
-				srcs/MutantStack.cpp
-
+SRCS =	srcs/main.cpp
 CXX = c++
 
 CXXFLAGS = -Wall -Werror -Wextra -std=c++98
