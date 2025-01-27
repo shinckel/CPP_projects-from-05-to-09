@@ -19,7 +19,7 @@ This project was developed for 42 school. For comprehensive information regardin
 1. C++ module 06 - conversion of scalar types, casting
 3. C++ module 07 - templates
 4. C++ module 08 — templated containers, iterators, algorithms, extending the functionality of the standard library
-5. C++ module 09 — 
+5. C++ module 09 — Bitcoin Value Calculation `std::map`, Reverse Polish Notation (RPN) `std::stack`, Merge-Insertion Sort `std::vector`
 
 ```c++
 try {
@@ -201,6 +201,10 @@ void Vector<T>::push_back(const T& t) {
   ++space;
 }
 ```
+### File stream classes — std::ifstream for input file streams and std::ofstream for output file streams
+```c++
+// istream& getline(istream& is, string& str, char delim);
+```
 
 ### References
 [std::exception::what](https://en.cppreference.com/w/cpp/error/exception/what)<br />
@@ -243,3 +247,4 @@ void Vector<T>::push_back(const T& t) {
 | **De Morgan's laws** | `not (A or B) = (not A) and (not B)` | Read more [here](https://en.wikipedia.org/wiki/De_Morgan%27s_laws). |
 | **container adaptors** | `stack<T>` | The standard library provides container adaptors `queue<T>`, `stack<T>`, and `priority_queue<T>`. A container adapter is a class template in the C++ Standard Library that provides a specific interface for a container by using another container type as its underlying storage. The container adapter modifies or restricts the interface of the underlying container to provide a different abstraction. Read more [here](https://en.cppreference.com/w/cpp/container/stack/stack). **Abstraction:** `std::stack` provides a stack interface (LIFO - Last In, First Out) by restricting the operations of the underlying container. It only exposes push, pop, top, and size-related operations, hiding other operations of the underlying container (underlying container: by default it is a `std::deque` Double Ended Queue... data structure in which you can append in either side, very similar to a vector). |
 | **LIFO** | `Last In, First Out` | <img width="565" alt="Screenshot 2025-01-22 at 21 57 01" src="https://github.com/user-attachments/assets/05cad8ae-d6e8-4e68-a9b6-d2bb3dcd62a1" /> |
+| **find_last_not_of** | `date = date.substr(0, date.find_last_not_of(" \t\n\r\f\v") + 1);` | Member function of the std::string class. It is used to find the last character in the string that is not one of the characters specified in the given set. Useful for trimming trailing characters from a string. `size_t find_last_not_of(const std::string& str, size_t pos = std::string::npos) const;` **str:** a string containing the characters to be excluded. **pos:** the position to start the search from. The default value is std::string::npos, which means the search starts from the end of the string. |
