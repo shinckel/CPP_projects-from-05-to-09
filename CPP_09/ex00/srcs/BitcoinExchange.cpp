@@ -30,6 +30,13 @@ struct  BitcoinExchange::OutOfBoundsValue : public std::exception {
     }
 };
 
+void  BitcoinExchange::isValidValue(double &value) const {
+  if(value < 0)
+    throw OutOfBoundsValue();
+  if(value > 1000)
+    throw OutOfBoundsValue();
+}
+
 bool checkFormat(const std::string &date) {
   if (date.size() != 10 || date[4] != '-' || date[7] != '-') {
       return false;
@@ -71,11 +78,6 @@ std::map<std::string, double>::const_iterator BitcoinExchange::isValidDate(const
   return it;
 }
 
-bool BitcoinExchange::isValidValue(const std::string &value) const {
-  (void)value;
-  return false;
-}
-
 /*
                     functionA()
                         |
@@ -110,12 +112,6 @@ void BitcoinExchange::loadDatabase(const std::string &line, BitcoinExchange &ins
     instance.bitcoinPrices[date] = price;
 }
 
-// TODO
-// how to define if it is an int or float?? remember to print accordingly
-// std::cout << bitcoinPrices["2009-01-02"] << std::endl;
-// std::cout << std::fixed << std::setprecision(2);
-// std::cout << bitcoinPrices["2022-03-29"] << std::endl;
-
 // std::map is O(log n) each time [] operator is used
 void BitcoinExchange::processInputFile(const std::string &line, BitcoinExchange &instance) {
   std::istringstream iss(line);
@@ -128,7 +124,8 @@ void BitcoinExchange::processInputFile(const std::string &line, BitcoinExchange 
     date = date.substr(0, date.find_last_not_of(" \t\n\r\f\v") + 1);
     try {
       it = instance.isValidDate(date);
-      std::cout << "date: "<< it->first << " value: " << it->second << std::endl;
+      instance.isValidValue(price);
+      std::cout << it->first << " => " << price << " = " << (it->second * price) << std::endl;
     } catch(const std::exception& e) {
       std::cerr << e.what() << std::endl;
     }

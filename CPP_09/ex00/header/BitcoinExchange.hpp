@@ -21,7 +21,6 @@
 # include <iomanip> // std::setprecision
 # include <cstring> // strcmp
 # include <cctype> // isdigit
-# include <ctime>
 # include <cstdlib> // atoi
 
 // container choise: std::map, it allows efficient key-based lookups
@@ -41,13 +40,13 @@ class BitcoinExchange {
     // option: lambda functions?
     static void loadDatabase(const std::string &line, BitcoinExchange &instance);
     static void processInputFile(const std::string &line, BitcoinExchange &instance);
+    std::map<std::string, double>::const_iterator isValidDate(const std::string &date) const;
+    void  isValidValue(double &value) const;
     struct  WrongFormat;
     struct  OutOfBoundsValue;
 
   private:
     std::map<std::string, double> bitcoinPrices;
-    std::map<std::string, double>::const_iterator isValidDate(const std::string &date) const;
-    bool  isValidValue(const std::string &value) const;
 };
 
 #endif
