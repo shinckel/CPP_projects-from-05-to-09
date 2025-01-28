@@ -23,6 +23,8 @@
 # include <cctype> // isdigit
 # include <cstdlib> // atoi
 
+# define HEADER "date | value"
+
 // container choise: std::map, it allows efficient key-based lookups
 class BitcoinExchange {
   public:
@@ -41,8 +43,8 @@ class BitcoinExchange {
     static void loadDatabase(const std::string &line, BitcoinExchange &instance);
     static void processInputFile(const std::string &line, BitcoinExchange &instance);
     std::map<std::string, double>::const_iterator isValidDate(const std::string &date) const;
-    void  isValidValue(double &value) const;
-    struct  WrongFormat;
+    struct  WrongDateFormat;
+    struct  WrongInputFormat;
     struct  OutOfBoundsValue;
 
   private:
