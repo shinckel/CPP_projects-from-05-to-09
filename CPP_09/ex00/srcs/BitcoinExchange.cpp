@@ -17,25 +17,24 @@ BitcoinExchange::~BitcoinExchange() {};
 BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &clone) { *this = clone; return *this; }
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &clone) { *this = clone; }
 
-struct  BitcoinExchange::WrongFormat : public std::exception {
-    const char* what() const throw() {
-        return "Wrong Format — Please follow YYYY-MM-DD";
-    }
+struct  BitcoinExchange::WrongDateFormat : public std::exception {
+  const char* what() const throw() {
+    return "\033[1;41m WrongDateFormat \033[0m — Please enter a valid date format YYYY-MM-DD";
+  }
+};
+
+struct  BitcoinExchange::WrongInputFormat : public std::exception {
+  const char* what() const throw() {
+    return "\033[1;41m WrongInputFormat \033[0m — Please, entender a valid format in your input file <date | value>";
+  }
 };
 
 // a valid value must be either a float or a positive integer, between 0 and 1000
 struct  BitcoinExchange::OutOfBoundsValue : public std::exception {
   const char* what() const throw() {
-        return "OutOfBounds Value — Please positive integer between 0 and 1000";
-    }
+    return "\033[1;41m OutOfBoundsValue \033[0m — Please, enter a positive integer between 0 and 1000 as value";
+  }
 };
-
-void  BitcoinExchange::isValidValue(double &value) const {
-  if(value < 0)
-    throw OutOfBoundsValue();
-  if(value > 1000)
-    throw OutOfBoundsValue();
-}
 
 bool checkFormat(const std::string &date) {
   if (date.size() != 10 || date[4] != '-' || date[7] != '-') {
@@ -65,7 +64,7 @@ bool checkFormat(const std::string &date) {
 // return std::regex_match(date, datePattern);
 std::map<std::string, double>::const_iterator BitcoinExchange::isValidDate(const std::string &date) const {
   if (!checkFormat(date))
-    throw WrongFormat();
+    throw WrongDateFormat();
   // look for the date in the map
   std::map<std::string, double>::const_iterator it = bitcoinPrices.find(date);
   if (it != bitcoinPrices.end())
@@ -98,6 +97,13 @@ void BitcoinExchange::readingStreams(const std::string &file, LineProcessor proc
     std::cerr << "Error: could not open file — " << file << std::endl;
     return;
   }
+  // skip the header line
+  std::string header;
+  if (!std::getline(inputFile, header)) {
+    std::cerr << "Error: could not read header from file — " << file << std::endl;
+    return;
+  }
+  // apply processing function in each line
   std::string line;
   while (std::getline(inputFile, line))
     processor(line, *this);
@@ -118,17 +124,20 @@ void BitcoinExchange::processInputFile(const std::string &line, BitcoinExchange 
   std::map<std::string, double>::const_iterator it;
   std::string date;
   double price;
-  if(std::getline(iss, date, '|') && iss >> price) {
+  try {
+    if(std::getline(iss, date, '|') && iss >> price) {
     // finds the position of the last character that is not a whitespace character
     // substr(0, pos + 1) creates a substring from beginning to the position of the last non-whitespace char
     date = date.substr(0, date.find_last_not_of(" \t\n\r\f\v") + 1);
-    try {
       it = instance.isValidDate(date);
-      instance.isValidValue(price);
+      if (price < 0 || price > 1000)
+        throw OutOfBoundsValue();
       std::cout << it->first << " => " << price << " = " << (it->second * price) << std::endl;
-    } catch(const std::exception& e) {
-      std::cerr << e.what() << std::endl;
+    } else {
+      throw WrongInputFormat();
     }
+  } catch(const std::exception& e) {
+    std::cerr << e.what() << std::endl;
   }
 }
 
