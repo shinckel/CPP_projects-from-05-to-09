@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+         #
+#    By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/26 21:27:04 by shinckel          #+#    #+#              #
-#    Updated: 2024/12/19 18:15:16 by shinckel         ###   ########.fr        #
+#    Updated: 2025/02/09 17:04:40 by shinckel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = bureaucrat
+NAME = form
 
 SRCS =	srcs/main.cpp \
 				srcs/Bureaucrat.cpp \

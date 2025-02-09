@@ -3,26 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ShrubberyCreationForm.cpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 15:01:42 by shinckel          #+#    #+#             */
-/*   Updated: 2024/12/17 18:25:51 by shinckel         ###   ########.fr       */
+/*   Updated: 2025/02/09 17:05:46 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/ShrubberyCreationForm.hpp"
 
-// Default constructor
 ShrubberyCreationForm::ShrubberyCreationForm() : AForm("ShrubberyCreationForm", 145, 137) {
   _target = "default";
 }
 
-// Parameterized constructor
 ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : AForm("ShrubberyCreationForm", 145, 137) {
   _target = target;
 }
 
-// Copy constructor
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &clone) : AForm(clone) {
   _target = clone._target;
 }

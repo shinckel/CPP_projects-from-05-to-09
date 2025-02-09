@@ -3,26 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   RobotomyRequestForm.cpp                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:25:29 by shinckel          #+#    #+#             */
-/*   Updated: 2024/12/20 11:27:52 by shinckel         ###   ########.fr       */
+/*   Updated: 2025/02/09 17:06:09 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/RobotomyRequestForm.hpp"
 
-// Default constructor
 RobotomyRequestForm::RobotomyRequestForm() : AForm("RobotomyRequestForm", 72, 45) {
   _target = "default";
 }
 
-// Parameterized constructor
 RobotomyRequestForm::RobotomyRequestForm(std::string target) : AForm("RobotomyRequestForm", 72, 45) {
   _target = target;
 }
 
-// Copy constructor
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &clone) : AForm(clone) {
   _target = clone._target;
 }

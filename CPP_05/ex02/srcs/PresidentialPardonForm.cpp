@@ -3,26 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   PresidentialPardonForm.cpp                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 15:03:06 by shinckel          #+#    #+#             */
-/*   Updated: 2024/12/18 00:53:30 by shinckel         ###   ########.fr       */
+/*   Updated: 2025/02/09 17:05:25 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/PresidentialPardonForm.hpp"
 
-// Default constructor
 PresidentialPardonForm::PresidentialPardonForm() : AForm("PresidentialPardonForm", 25, 5) {
   _target = "default";
 }
 
-// Parameterized constructor
 PresidentialPardonForm::PresidentialPardonForm(std::string target) : AForm("PresidentialPardonForm", 25, 5) {
   _target = target;
 }
 
-// Copy constructor
 PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &clone) : AForm(clone) {
   _target = clone._target;
 }
