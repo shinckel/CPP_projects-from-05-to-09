@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ScalarConverter.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 17:28:09 by shinckel          #+#    #+#             */
-/*   Updated: 2025/01/08 22:07:28 by shinckel         ###   ########.fr       */
+/*   Updated: 2025/02/09 20:08:57 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/ScalarConverter.hpp"
+
+// missing > 6.1 shouldnt be the result for integer
+// 10. / 10.f should pass
+// .f shouldnt pass
+// int as zero
 
 ScalarConverter::ScalarConverter() {}
 ScalarConverter::~ScalarConverter() {}

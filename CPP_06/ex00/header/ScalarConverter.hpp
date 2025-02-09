@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScalarConverter.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 12:06:06 by shinckel          #+#    #+#             */
-/*   Updated: 2025/01/08 21:42:56 by shinckel         ###   ########.fr       */
+/*   Updated: 2025/02/09 20:12:49 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,13 @@ class ScalarConverter {
         INVALID
     };
 
+
+    // check datatype, if I use double, does it convert correctly? Could the
+    // type be dynamic as well?
+    // template <typename T>
     struct ConversionResult {
         DataType type;
-        double value;
+        // <T> value;
     };
 
     // Static methods for conversion

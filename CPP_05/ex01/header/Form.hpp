@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Form.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 22:41:16 by shinckel          #+#    #+#             */
-/*   Updated: 2024/12/14 02:04:51 by shinckel         ###   ########.fr       */
+/*   Updated: 2025/02/09 18:02:12 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ class Form {
   private:
     const std::string _name;
     bool  _signed;
-    int   _gradeToSign;
-    int   _gradeToExecute;
+    const int   _gradeToSign;
+    const int   _gradeToExecute;
 };
 
 std::ostream  &operator<<(std::ostream &out, const Form &n);
