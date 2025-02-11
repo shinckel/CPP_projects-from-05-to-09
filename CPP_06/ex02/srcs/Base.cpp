@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:00:46 by shinckel          #+#    #+#             */
-/*   Updated: 2025/02/11 18:37:45 by shinckel         ###   ########.fr       */
+/*   Updated: 2025/02/11 18:43:01 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "../header/B.hpp"
 #include "../header/C.hpp"
 #include "../header/Base.hpp"
+#include "../header/Base.h"
 
 Base::~Base(void) {
   std::cout << "Base destructor called" << std::endl;

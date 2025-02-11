@@ -6,12 +6,12 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:25:37 by shinckel          #+#    #+#             */
-/*   Updated: 2025/02/11 18:38:58 by shinckel         ###   ########.fr       */
+/*   Updated: 2025/02/11 18:44:33 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/A.hpp"
-#include "../header/Base.hpp"
+#include "../header/Base.h"
 
 // implement a base class and derived classes
 // create functions to identify the type of the derived class instances at runtime
