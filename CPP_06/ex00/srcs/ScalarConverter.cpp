@@ -12,8 +12,6 @@
 
 #include "../header/ScalarConverter.hpp"
 
-// missing > 6.1 shouldnt be the result for integer
-// 10. / 10.f should pass
 // .f shouldnt pass
 // int as zero
 
@@ -28,7 +26,7 @@ void ScalarConverter::print(double num) {
         std::cout << "char: non displayable" << std::endl;
     (num < std::numeric_limits<int>::min() || num > std::numeric_limits<int>::max()) ?
         std::cout << "int: out of range" << std::endl :
-        std::cout << "int: " << num << std::endl;
+        std::cout << "int: " << static_cast<int>(num) << std::endl;
     std::cout << std::fixed << std::setprecision(1);
     (num < -std::numeric_limits<float>::max() || num > std::numeric_limits<float>::max()) ?
         std::cout << "float: out of range" << std::endl :
@@ -37,15 +35,18 @@ void ScalarConverter::print(double num) {
 }
 
 // if the character '.' and 'f' is not found, find returns std::string::npos... otherwise, return substr index position
+// checking literal.length() > 2 is necessary, otherwise ".f" will be understood as valid arg 
 ScalarConverter::ConversionResult ScalarConverter::determineDataType(const std::string &literal) {
     ConversionResult result;
-    if (literal == "nan" || literal == "nanf" || literal == "-inff" || literal == "+inff" || literal == "-inf" || literal == "+inf") {
+    if (literal == "nan" || literal == "nanf" || literal == "-inff" \
+        || literal == "+inff" || literal == "-inf" || literal == "+inf") {
         result.type = SPECIAL;
         result.value = std::numeric_limits<double>::quiet_NaN();
     } else if (literal.length() == 1 && !std::isdigit(literal[0])) {
         result.type = CHAR;
         result.value = literal[0];
-    } else if (literal.find('.') != std::string::npos && literal.find('f') != std::string::npos && (literal.find('f') == literal.size() - 1)) {
+    } else if (literal.find('.') != std::string::npos && literal.find('f') != std::string::npos \
+        && (literal.find('f') == literal.size() - 1) && literal.length() > 2) {
         std::string floatLiteral = literal;
         if (floatLiteral[floatLiteral.length() - 1] == 'f')
             floatLiteral = floatLiteral.substr(0, floatLiteral.length() - 1);

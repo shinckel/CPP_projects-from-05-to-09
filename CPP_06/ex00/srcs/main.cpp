@@ -13,7 +13,7 @@
 #include "../header/ScalarConverter.hpp"
 
 /*
-42 / 42.42 / 42.0f / nan / +inf / -inf / A / * / hello
+42 / 42.42 / 42.0f / nan / +inf / -inf / A / * / hello / -0.4 / .f error
 */
 
 int main(int argc, char *argv[]) {

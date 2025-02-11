@@ -23,16 +23,16 @@
 # include <cctype>
 # include <stdexcept>
 
-// The goal is to convert a string representation of a literal
+// the goal is to convert a string representation of a literal
 // into different scalar types and handle edge cases
 // such as non-displayable characters / nan / +inf / -inf
 class ScalarConverter {
   public:
-    // Static method to convert the string literal: no instantiation
+    // static method to convert the string literal: no instantiation
     static void converter(const std::string &literal);
 
   private:
-    // Private constructor to prevent instantiation
+    // private constructor to prevent instantiation
     // Orthodox Canonical Form
     ScalarConverter();
     ~ScalarConverter();
@@ -48,13 +48,9 @@ class ScalarConverter {
         INVALID
     };
 
-
-    // check datatype, if I use double, does it convert correctly? Could the
-    // type be dynamic as well?
-    // template <typename T>
     struct ConversionResult {
-        DataType type;
-        // <T> value;
+        DataType    type;
+        double      value;
     };
 
     // Static methods for conversion
