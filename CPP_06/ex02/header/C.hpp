@@ -16,8 +16,6 @@
 #include "Base.hpp"
 
 class C : public Base {
-  public:
-    std::string getName(void) const { return "C"; }
 };
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:00:46 by shinckel          #+#    #+#             */
-/*   Updated: 2025/01/02 15:46:14 by shinckel         ###   ########.fr       */
+/*   Updated: 2025/02/11 18:37:45 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ Base::~Base(void) {
   std::cout << "Base destructor called" << std::endl;
 }
 
-Base* Base::generate() {
+Base* generate() {
   // seed random number from current time in seconds (time_t obj)
   // so it generates different sequences each time program runs
   srand(static_cast<unsigned int>(time(0)));
@@ -35,19 +35,41 @@ Base* Base::generate() {
   return NULL; // safeguard
 }
 
-void Base::identify(Base* p) {
+void identify(Base* p) {
   if (dynamic_cast<A*>(p))
-    std::cout << "Dynamic cast reference: A" << std::endl;
+    printBase("Dynamic cast reference: A");
   else if (dynamic_cast<B*>(p))
-    std::cout << "Dynamic cast reference: B" << std::endl;
+    printBase("Dynamic cast reference: B");
   else if (dynamic_cast<C*>(p))
-    std::cout << "Dynamic cast reference: C" << std::endl;
+    printBase("Dynamic cast reference: C");
   else
-    std::cout << "unknown type" << std::endl;
+    printBase("Unknown type");
 }
 
-void Base::identify(Base& p) {
-  if (pointerDynamicCast<A>(p)) return;
-  if (pointerDynamicCast<B>(p)) return;
-  if (pointerDynamicCast<C>(p)) return;
+void  identify(Base& p) {
+  if (pointerDynamicCast<A>(p)) 
+    printBase("Dynamic cast pointer: A");
+  else if (pointerDynamicCast<B>(p)) 
+    printBase("Dynamic cast pointer: B");
+  else if (pointerDynamicCast<C>(p)) 
+    printBase("Dynamic cast pointer: C");
+  else
+    printBase("Unknown type");
+}
+
+void  printBase(std::string str) {
+  std::cout << str << std::endl;
+}
+
+// possible syntax, however not compatible to C++98
+// T& t{dynamic_cast<T&>(p)};
+template <typename T>
+bool pointerDynamicCast(Base& p) {
+  try {
+    T& t = dynamic_cast<T&>(p);
+    (void)t;
+  } catch(std::exception& e) {
+    return false;
+  }
+  return true;
 }
