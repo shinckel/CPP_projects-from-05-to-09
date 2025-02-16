@@ -28,10 +28,12 @@ void ScalarConverter::print(double num) {
         std::cout << "int: out of range" << std::endl :
         std::cout << "int: " << static_cast<int>(num) << std::endl;
     std::cout << std::fixed << std::setprecision(1);
-    (num < -std::numeric_limits<float>::max() || num > std::numeric_limits<float>::max()) ?
+    (num <= -std::numeric_limits<float>::max() || num >= std::numeric_limits<float>::max()) ?
         std::cout << "float: out of range" << std::endl :
-        std::cout << "float: " << num << "f" << std::endl;
-    std::cout << "double: " << num << std::endl;
+        std::cout << "float: " << static_cast<float>(num) << "f" << std::endl;
+    (num <= -std::numeric_limits<double>::max() || num >= std::numeric_limits<double>::max()) ?
+        std::cout << "double: out of range" << std::endl :
+        std::cout << "double: " << static_cast<double>(num) << std::endl;
 }
 
 // if the character '.' and 'f' is not found, find returns std::string::npos... otherwise, return substr index position
