@@ -217,6 +217,7 @@ void Vector<T>::push_back(const T& t) {
 [Dynamic Arrays in C++ (std::vector)](https://www.youtube.com/watch?v=HcESuwmlHEY)<br />
 [Stacks and Queues Shopping List Exercise - C++ Tutorial 30](https://www.youtube.com/watch?v=6Ea980Vg8UA)<br />
 [Scott Meyers - Effective Modern C++ part 1](https://www.youtube.com/watch?v=fhM24zs1MFA&list=PLmxXlAVb5hkyq5njldMEPYdOqTAQPLChR)<br />
+[Reverse Polish Notation and The Stack - Computerphile](https://www.youtube.com/watch?v=7ha78yWRDlE)
 
 ## Concepts
 
@@ -248,3 +249,9 @@ void Vector<T>::push_back(const T& t) {
 | **container adaptors** | `stack<T>` | The standard library provides container adaptors `queue<T>`, `stack<T>`, and `priority_queue<T>`. A container adapter is a class template in the C++ Standard Library that provides a specific interface for a container by using another container type as its underlying storage. The container adapter modifies or restricts the interface of the underlying container to provide a different abstraction. Read more [here](https://en.cppreference.com/w/cpp/container/stack/stack). **Abstraction:** `std::stack` provides a stack interface (LIFO - Last In, First Out) by restricting the operations of the underlying container. It only exposes push, pop, top, and size-related operations, hiding other operations of the underlying container (underlying container: by default it is a `std::deque` Double Ended Queue... data structure in which you can append in either side, very similar to a vector). |
 | **LIFO** | `Last In, First Out` | <img width="565" alt="Screenshot 2025-01-22 at 21 57 01" src="https://github.com/user-attachments/assets/05cad8ae-d6e8-4e68-a9b6-d2bb3dcd62a1" /> |
 | **find_last_not_of** | `date = date.substr(0, date.find_last_not_of(" \t\n\r\f\v") + 1);` | Member function of the std::string class. It is used to find the last character in the string that is not one of the characters specified in the given set. Useful for trimming trailing characters from a string. `size_t find_last_not_of(const std::string& str, size_t pos = std::string::npos) const;` **str:** a string containing the characters to be excluded. **pos:** the position to start the search from. The default value is std::string::npos, which means the search starts from the end of the string. |
+| **reverse polish notation** | `a b +` | Usually, operators come in between operands `a + b`: infix use. Prefix notation: `+ a b` `add(a, b)`. Postfix notation `a b +`, called reverse polish notation (because of its mathematician creator Jan Łukasiewicz). It saves the interpreter or compiler a lot of time and effort in order to execute the expressions. |
+
+C compiler to assembly code
+store values of a and b in memory, before they can be added together, they must be lifted into the central processor unit (CPU) and when they are added it call the arimathic unit inside the CPU. So, in summary, GET A INTO A REGISTER, GET B INTO A REGISTER, AND DO THE ADDITION.
+Multiply takes precedence (stronger operator). So, `a + b * c`, multiplication is done first. If you want the addition to go first, add parenthesis `(a + b) * c`. No, transfer this thought to RPN> `a + b * c => a b c * +` operator will be applied to the imediate two preceding operands `(a + b) * c => a b + c *`
+Stack: last thing in first thing out mechanism
