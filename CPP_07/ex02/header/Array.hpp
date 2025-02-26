@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 14:02:53 by shinckel          #+#    #+#             */
-/*   Updated: 2025/01/06 15:53:45 by shinckel         ###   ########.fr       */
+/*   Updated: 2025/02/26 17:06:54 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,11 @@ class Array {
       return _size;
     }
 
+    // overload with const data type considering the way main was developed
+    unsigned int size() const {
+      return _size;
+    }
+
     struct OutOfBounds : public std::exception {
       const char* what() const throw() {
         return "Index out of bounds";
@@ -65,6 +70,15 @@ class Array {
     };
 
     T& operator[](unsigned int i) {
+      if (i >= _size) {
+        throw Array::OutOfBounds();
+      }
+      return array[i];
+    }
+
+    // this program should also handle const data types
+    // in the evaluation sheet there is a testing program using const
+    const T& operator[](unsigned int i) const {
       if (i >= _size) {
         throw Array::OutOfBounds();
       }

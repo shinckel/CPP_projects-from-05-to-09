@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 14:03:51 by shinckel          #+#    #+#             */
-/*   Updated: 2025/01/05 20:21:49 by shinckel         ###   ########.fr       */
+/*   Updated: 2025/02/26 17:17:01 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ int	main(void)
 
     Array<People>   friends(3);
     try {
-        People p1 = {"Pesto", "A+", 31};
-        People p2 = {"Dani", "B-", 28};
-        People p3 = {"Zuca", "B-", 28};
+        People p1 = {"Hollie", "A+", 6};
+        People p2 = {"Dani", "B-", 37};
+        People p3 = {"Zuca", "B-", 38};
         friends[0] = p1;
         friends[1] = p2;
         friends[2] = p3;
@@ -67,6 +67,26 @@ int	main(void)
     } catch (std::exception &e) {
 		std::cout << e.what() << std::endl;
 	}
+
+    Array<People> tempFamily(3);
+    People p7 = {"Dorina", "A+", 60};
+    People p8 = {"Martha", "B-", 38};
+    People p9 = {"Maria", "B+", 29};
+    tempFamily[0] = p7;
+    tempFamily[1] = p8;
+    tempFamily[2] = p9;
+    const Array<People> constFamily = tempFamily;
+    try {
+        std::cout << "———————————————————————" << std::endl;
+        for (unsigned int i = 0; i < constFamily.size(); ++i) {
+            std::cout << "Const Family " << i << ": " << constFamily[i].name << ", " 
+                      << constFamily[i].bloodType << ", " << constFamily[i].age << std::endl;
+        }
+        // operator overload [] throws OutOfBounds exception
+        std::cout << constFamily[3].name << std::endl;
+    } catch (std::exception &e) {
+        std::cout << e.what() << std::endl;
+    }
     return 0;
 }
 
