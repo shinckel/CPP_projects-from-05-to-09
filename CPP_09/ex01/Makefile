@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+         #
+#    By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/26 21:27:04 by shinckel          #+#    #+#              #
-#    Updated: 2025/02/16 19:06:22 by shinckel         ###   ########.fr        #
+#    Updated: 2025/02/26 21:52:29 by shinckel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = RPN
 
 SRCS =	srcs/main.cpp \
-		srcs/RPN.cpp
+				srcs/RPN.cpp
 
 CXX = c++
 

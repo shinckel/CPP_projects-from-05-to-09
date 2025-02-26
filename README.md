@@ -218,6 +218,7 @@ void Vector<T>::push_back(const T& t) {
 [Stacks and Queues Shopping List Exercise - C++ Tutorial 30](https://www.youtube.com/watch?v=6Ea980Vg8UA)<br />
 [Scott Meyers - Effective Modern C++ part 1](https://www.youtube.com/watch?v=fhM24zs1MFA&list=PLmxXlAVb5hkyq5njldMEPYdOqTAQPLChR)<br />
 [Reverse Polish Notation and The Stack - Computerphile](https://www.youtube.com/watch?v=7ha78yWRDlE)
+[Operator Precedence](https://en.cppreference.com/w/cpp/language/operator_precedence)
 
 ## Concepts
 
@@ -254,4 +255,10 @@ void Vector<T>::push_back(const T& t) {
 C compiler to assembly code
 store values of a and b in memory, before they can be added together, they must be lifted into the central processor unit (CPU) and when they are added it call the arimathic unit inside the CPU. So, in summary, GET A INTO A REGISTER, GET B INTO A REGISTER, AND DO THE ADDITION.
 Multiply takes precedence (stronger operator). So, `a + b * c`, multiplication is done first. If you want the addition to go first, add parenthesis `(a + b) * c`. No, transfer this thought to RPN> `a + b * c => a b c * +` operator will be applied to the imediate two preceding operands `(a + b) * c => a b + c *`
-Stack: last thing in first thing out mechanism
+
+Stack: last thing in first thing out storage mechanism
+Popping a stack (top)
+Push operands to the stack (a b c)
+If you hit an operator, think how many operands does this got then take them off the stack
+Do de operation and push the answer back (b * c = d)
+push the final asnwer and leave it at the top of the stack (a + d)
