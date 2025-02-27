@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ScalarConverter.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 17:28:09 by shinckel          #+#    #+#             */
-/*   Updated: 2025/02/09 20:08:57 by shinckel         ###   ########.fr       */
+/*   Updated: 2025/02/27 09:48:39 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/ScalarConverter.hpp"
-
-// .f shouldnt pass
-// int as zero
 
 ScalarConverter::ScalarConverter() {}
 ScalarConverter::~ScalarConverter() {}

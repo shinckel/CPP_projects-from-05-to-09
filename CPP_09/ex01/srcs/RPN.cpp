@@ -6,12 +6,11 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 19:04:52 by shinckel          #+#    #+#             */
-/*   Updated: 2025/02/26 22:44:53 by shinckel         ###   ########.fr       */
+/*   Updated: 2025/02/27 10:07:16 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/RPN.hpp"
-#include <sstream>
 
 RPN::RPN() {};
 RPN::~RPN() {};
@@ -53,5 +52,5 @@ void RPN::mapData(const std::string &exp) {
     throw "Invalid expression";
   }
 
-  std::cout << "Result: " << s.top() << std::endl;
+  LOG("Result: " << s.top());
 }

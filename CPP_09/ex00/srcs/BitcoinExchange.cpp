@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 22:21:28 by shinckel          #+#    #+#             */
-/*   Updated: 2025/01/27 11:46:22 by shinckel         ###   ########.fr       */
+/*   Updated: 2025/02/27 09:27:03 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ struct  BitcoinExchange::WrongDateFormat : public std::exception {
 
 struct  BitcoinExchange::WrongInputFormat : public std::exception {
   const char* what() const throw() {
-    return "\033[1;41m WrongInputFormat \033[0m — Please, entender a valid format in your input file <date | value>";
+    return "\033[1;41m WrongInputFormat \033[0m — Please, enter a valid format in your input file <date | value>";
   }
 };
 
@@ -36,6 +36,7 @@ struct  BitcoinExchange::OutOfBoundsValue : public std::exception {
   }
 };
 
+// improve, don't use atoi
 bool checkFormat(const std::string &date) {
   if (date.size() != 10 || date[4] != '-' || date[7] != '-')
     return false;
