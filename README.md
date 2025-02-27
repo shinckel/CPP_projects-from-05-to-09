@@ -201,9 +201,45 @@ void Vector<T>::push_back(const T& t) {
   ++space;
 }
 ```
+
 ### File stream classes — std::ifstream for input file streams and std::ofstream for output file streams
 ```c++
 // istream& getline(istream& is, string& str, char delim);
+```
+
+### Sorting
+```c
+usage: data compression, computer graphics
+unsorted A[0:n] —> sorted B[0:n]
+find medium -> B[n/2] constant time once you have a sorted array O(1)
+
+Finding a specific item k
+unsorted -> linear time
+sorted -> logarithmic time using binary search -> compare k to B[n/2], divide and conquer (great paradigm)
+
+INSERTION SORT (O(n) steps in terms of key position)
+for i = 1, 2, ...n
+insert A[i] into sorted array A[0:i-1], insert it in the correct position
+by pairwise swaps down to the correct position
+5 2 4 6 1 3
+  |
+starts with the index 1 (key) — swap 1x
+
+2 5 4 6 1 3 
+    |
+  swap 1x
+
+2 4 5 6 1 3
+      |
+  do nothing
+
+2 4 5 6 1 3   
+        |
+      swap 4x
+
+1 2 4 5 6 3
+          |
+        swap 3x
 ```
 
 ### References
@@ -218,6 +254,8 @@ void Vector<T>::push_back(const T& t) {
 [Stacks and Queues Shopping List Exercise - C++ Tutorial 30](https://www.youtube.com/watch?v=6Ea980Vg8UA)<br />
 [Scott Meyers - Effective Modern C++ part 1](https://www.youtube.com/watch?v=fhM24zs1MFA&list=PLmxXlAVb5hkyq5njldMEPYdOqTAQPLChR)<br />
 [Reverse Polish Notation and The Stack - Computerphile](https://www.youtube.com/watch?v=7ha78yWRDlE)
+[Lecture 3: Insertion Sort, Merge Sort](https://www.youtube.com/watch?v=Kg4bqzAqRBM)
+[MIT OpenCourseWare — Introduction to Algorithms](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/video_galleries/lecture-videos/)
 
 ## Concepts
 
@@ -252,3 +290,8 @@ void Vector<T>::push_back(const T& t) {
 | **reverse polish notation** | `a b +` | Usually, operators come in between operands `a + b`: infix use. Prefix notation: `+ a b` `add(a, b)`. Postfix notation `a b +`, called reverse polish notation (because of its mathematician creator Jan Łukasiewicz). It saves the interpreter or compiler a lot of time and effort in order to execute the expressions. Imagine the C compiler to assembly code: store values of a and b in memory, before they can be added together, they must be lifted into the central processor unit (CPU) and when they are added it call the arimathic unit inside the CPU. So, in summary, GET A INTO A REGISTER, GET B INTO A REGISTER, AND DO THE ADDITION. Check online calculator [here](https://paodayag.dev/reverse-polish-notation-js-parser/). |
 | **Precedence** | Check [here](https://en.cppreference.com/w/cpp/language/operator_precedence) | Multiply takes precedence (stronger operator). So, `a + b * c`, multiplication is done first. If you want the addition to go first, add parenthesis `(a + b) * c`. Now, transfering this thought to RPN> `a + b * c => a b c * +` operator will be applied to the imediate two preceding operands `(a + b) * c => a b + c *` |
 | **Stack** | `LIFO` | Last thing in first thing out storage mechanism, popping a stack (top). Push operands to the stack (a b c). If you hit an operator, think how many operands does this got then take them off the stack. Do de operation and push the answer back (b * c = d). Push the final answer and leave it at the top of the stack (a + d). |
+
+
+Merge sort - divide and conquer
+
+Recurrence solving
