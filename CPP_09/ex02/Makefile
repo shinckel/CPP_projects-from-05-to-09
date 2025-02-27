@@ -6,14 +6,14 @@
 #    By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/26 21:27:04 by shinckel          #+#    #+#              #
-#    Updated: 2025/02/27 10:40:45 by shinckel         ###   ########.fr        #
+#    Updated: 2025/02/27 16:24:09 by shinckel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = PmergeMe
 
 SRCS =	srcs/main.cpp \
-				srcs/PmergeMe..cpp
+				srcs/PmergeMe.cpp
 
 CXX = c++
 

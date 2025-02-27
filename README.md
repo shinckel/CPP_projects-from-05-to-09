@@ -207,7 +207,7 @@ void Vector<T>::push_back(const T& t) {
 // istream& getline(istream& is, string& str, char delim);
 ```
 
-### Sorting
+### Sorting concept
 ```c
 usage: data compression, computer graphics
 unsorted A[0:n] —> sorted B[0:n]
@@ -217,7 +217,7 @@ Finding a specific item k
 unsorted -> linear time
 sorted -> logarithmic time using binary search -> compare k to B[n/2], divide and conquer (great paradigm)
 
-INSERTION SORT (O(n) steps in terms of key position)
+INSERTION SORT — O(n) steps in terms of key position + O(n) each step compares & swaps = O(n2)
 for i = 1, 2, ...n
 insert A[i] into sorted array A[0:i-1], insert it in the correct position
 by pairwise swaps down to the correct position
@@ -240,22 +240,22 @@ starts with the index 1 (key) — swap 1x
 1 2 4 5 6 3
           |
         swap 3x
+
+MERGE SORT — recursive algorithm, divide and conquer
+      A           - unsorted array of size n
+    /   \
+  L       R       - 2 arrays of size n/2
+  |       |
+  L1      R1      - 2 sorted arrays of size n/2
+  \       /
+    merge
+      |
+sorted array A    - sorted array of size n
 ```
 
-### References
-[std::exception::what](https://en.cppreference.com/w/cpp/error/exception/what)<br />
-[A Tour of C++ (Second edition)](https://www.stroustrup.com/tour2.html) [Exercises](https://www.stroustrup.com/4thExercises.pdf)<br />
-[The Design of C++ , lecture by Bjarne Stroustrup](https://www.youtube.com/watch?v=69edOm889V4)<br />
-[Bjarne Stroustrup - The Essence of C++](https://www.youtube.com/watch?v=ZXc_z1sNbfA)<br />
-[C Programming Tutorial 21 - Int, Float, and Double Data Types](https://www.youtube.com/watch?v=heULTdxf_yQ)<br />
-[Casting in C++](https://www.youtube.com/watch?v=pWZS1MtxI-A)<br />
-[A Tour of C++, page 39 — static_cast, page 161 — 14.2.4 Casts](https://elhacker.info/manuales/Lenguajes%20de%20Programacion/C++/A%20Tour%20of%20C++%20-%20Bjarne%20Stroustrup%20(Addison-Wesley,%202014)(193p).pdf)
-[Dynamic Arrays in C++ (std::vector)](https://www.youtube.com/watch?v=HcESuwmlHEY)<br />
-[Stacks and Queues Shopping List Exercise - C++ Tutorial 30](https://www.youtube.com/watch?v=6Ea980Vg8UA)<br />
-[Scott Meyers - Effective Modern C++ part 1](https://www.youtube.com/watch?v=fhM24zs1MFA&list=PLmxXlAVb5hkyq5njldMEPYdOqTAQPLChR)<br />
-[Reverse Polish Notation and The Stack - Computerphile](https://www.youtube.com/watch?v=7ha78yWRDlE)
-[Lecture 3: Insertion Sort, Merge Sort](https://www.youtube.com/watch?v=Kg4bqzAqRBM)
-[MIT OpenCourseWare — Introduction to Algorithms](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/video_galleries/lecture-videos/)
+Merge sort - divide and conquer
+
+Recurrence solving
 
 ## Concepts
 
@@ -291,7 +291,18 @@ starts with the index 1 (key) — swap 1x
 | **Precedence** | Check [here](https://en.cppreference.com/w/cpp/language/operator_precedence) | Multiply takes precedence (stronger operator). So, `a + b * c`, multiplication is done first. If you want the addition to go first, add parenthesis `(a + b) * c`. Now, transfering this thought to RPN> `a + b * c => a b c * +` operator will be applied to the imediate two preceding operands `(a + b) * c => a b + c *` |
 | **Stack** | `LIFO` | Last thing in first thing out storage mechanism, popping a stack (top). Push operands to the stack (a b c). If you hit an operator, think how many operands does this got then take them off the stack. Do de operation and push the answer back (b * c = d). Push the final answer and leave it at the top of the stack (a + d). |
 
-
-Merge sort - divide and conquer
-
-Recurrence solving
+### References
+[std::exception::what](https://en.cppreference.com/w/cpp/error/exception/what)<br />
+[A Tour of C++ (Second edition)](https://www.stroustrup.com/tour2.html) [Exercises](https://www.stroustrup.com/4thExercises.pdf)<br />
+[The Design of C++ , lecture by Bjarne Stroustrup](https://www.youtube.com/watch?v=69edOm889V4)<br />
+[Bjarne Stroustrup - The Essence of C++](https://www.youtube.com/watch?v=ZXc_z1sNbfA)<br />
+[C Programming Tutorial 21 - Int, Float, and Double Data Types](https://www.youtube.com/watch?v=heULTdxf_yQ)<br />
+[Casting in C++](https://www.youtube.com/watch?v=pWZS1MtxI-A)<br />
+[A Tour of C++, page 39 — static_cast, page 161 — 14.2.4 Casts](https://elhacker.info/manuales/Lenguajes%20de%20Programacion/C++/A%20Tour%20of%20C++%20-%20Bjarne%20Stroustrup%20(Addison-Wesley,%202014)(193p).pdf)
+[Dynamic Arrays in C++ (std::vector)](https://www.youtube.com/watch?v=HcESuwmlHEY)<br />
+[Stacks and Queues Shopping List Exercise - C++ Tutorial 30](https://www.youtube.com/watch?v=6Ea980Vg8UA)<br />
+[Scott Meyers - Effective Modern C++ part 1](https://www.youtube.com/watch?v=fhM24zs1MFA&list=PLmxXlAVb5hkyq5njldMEPYdOqTAQPLChR)<br />
+[Reverse Polish Notation and The Stack - Computerphile](https://www.youtube.com/watch?v=7ha78yWRDlE)
+[Lecture 3: Insertion Sort, Merge Sort](https://www.youtube.com/watch?v=Kg4bqzAqRBM)
+[MIT OpenCourseWare — Introduction to Algorithms](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/video_galleries/lecture-videos/)
+[The-Art-of-Computer-Programming-Books](https://github.com/manjunath5496/The-Art-of-Computer-Programming-Books)
