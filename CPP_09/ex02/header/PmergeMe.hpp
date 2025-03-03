@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:25:29 by shinckel          #+#    #+#             */
-/*   Updated: 2025/03/03 15:47:23 by shinckel         ###   ########.fr       */
+/*   Updated: 2025/03/03 22:19:57 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,18 @@ class PmergeMe {
     PmergeMe(const PmergeMe &clone);
     PmergeMe &operator=(const PmergeMe &clone);
 
-    void        fordJohnsonSort(PmergeMe &instance);
-    void        mergeInsertVect(PmergeMe &instance);
-    void        mergeInsertList(PmergeMe &instance);
+    static void fordJohnsonSort(PmergeMe &instance);
+    static void mergeInsertVect(PmergeMe &instance);
+    static void mergeInsertList(PmergeMe &instance);
     static bool checkInput(const std::string& str);
     struct      InvalidInput;
 
-    std::vector<int>                  _v;
-    std::vector<int>                  _sortedV;
-    std::vector<std::pair<int, int> > _pairsV;
-    std::list<int>                    _l;
-    std::list<int>                    _sortedL;
-    std::list<std::pair<int, int> >   _pairsL;    
+    std::vector<int>                  _vec;
+    std::vector<int>                  _sortedVec;
+    std::vector<std::pair<int, int> > _pairsVec;
+    std::list<int>                    _lst;
+    std::list<int>                    _sortedLst;
+    std::list<std::pair<int, int> >   _pairsLst;
 };
 
 #endif

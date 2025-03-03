@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:25:34 by shinckel          #+#    #+#             */
-/*   Updated: 2025/03/03 16:04:20 by shinckel         ###   ########.fr       */
+/*   Updated: 2025/03/03 22:38:16 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 PmergeMe::PmergeMe() {};
 PmergeMe::~PmergeMe() {};
-PmergeMe &PmergeMe::operator=(const PmergeMe &clone) { *this = clone; return *this; }
-PmergeMe::PmergeMe(const PmergeMe &clone) { *this = clone; }
+PmergeMe &PmergeMe::operator=(const PmergeMe &clone) { (void)clone; return *this; }
+PmergeMe::PmergeMe(const PmergeMe &clone) { (void)clone; }
 
 struct  PmergeMe::InvalidInput : public std::exception {
   const char* what() const throw() {
@@ -39,6 +39,13 @@ void printPairs(std::vector<std::pair<int, int> >& vec) {
   std::cout << std::endl;
 }
 
+void printPairs(std::list<std::pair<int, int> >& vec) {
+  for (std::list<std::pair<int, int> >::const_iterator it = vec.begin(); it != vec.end(); ++it) {
+      std::cout << "(" << it->first << ", " << it->second << ") ";
+  }
+  std::cout << std::endl;
+}
+
 // UTILS DEBUGGING
 void printList(const std::list<int>& lst) {
   for (std::list<int>::const_iterator it = lst.begin(); it != lst.end(); ++it) {
@@ -54,42 +61,42 @@ bool PmergeMe::checkInput(const std::string& str) {
           strtol(str.c_str(), NULL, 10) < 1);
 }
 
-// reserves space for the pairs that will be added to _pairsV
+// reserves space for the pairs that will be added to _pairsVec
 // so, vector does not need to reallocate memory as pairs are added, which can improve performance
 void PmergeMe::mergeInsertVect(PmergeMe &i) {
   // check if already sorted
 
   std::pair<int, int> pair;
   std::vector<std::pair<int, int> > partitions;
-  partitions.reserve(i._v.size() / 2 + i._v.size() % 2);
+  partitions.reserve(i._vec.size() / 2 + i._vec.size() % 2);
 
-  for (size_t j = 0; j < i._v.size(); j += 2) {
-    if (j + 1 < i._v.size()) { // if there is a pair
-      pair = std::make_pair(std::min(i._v[j], i._v[j + 1]), std::max(i._v[j], i._v[j + 1]));
+  for (size_t j = 0; j < i._vec.size(); j += 2) {
+    if (j + 1 < i._vec.size()) { // if there is a pair
+      pair = std::make_pair(std::min(i._vec[j], i._vec[j + 1]), std::max(i._vec[j], i._vec[j + 1]));
     } else { // if not, second elem remains uninitialized
-      pair.first = i._v[j];
+      pair.first = i._vec[j];
       pair.second = '\0';
     }
     partitions.push_back(pair);
   }
   // printPairs(partitions); // debugging  
 
-  i._pairsV.reserve(partitions.size());
+  i._pairsVec.reserve(partitions.size());
   for (size_t j = 0; j < partitions.size(); j++) {
-    std::vector<std::pair<int, int> >::iterator it = lower_bound(i._pairsV.begin(), i._pairsV.end(), partitions[j]);
-    i._pairsV.insert(it, partitions[j]);
+    std::vector<std::pair<int, int> >::iterator it = lower_bound(i._pairsVec.begin(), i._pairsVec.end(), partitions[j]);
+    i._pairsVec.insert(it, partitions[j]);
   }
 
-  for (size_t j = 0; j < i._pairsV.size(); j++) {
-    i._sortedV.push_back(i._pairsV[j].first);
+  for (size_t j = 0; j < i._pairsVec.size(); j++) {
+    i._sortedVec.push_back(i._pairsVec[j].first);
   }
 
-  for (size_t j = 0; j < i._pairsV.size(); j++) {
-    std::vector<int>::iterator it = lower_bound(i._sortedV.begin(), i._sortedV.end(), i._pairsV[j].second);
-    if (i._pairsV[j].second)
-      i._sortedV.insert(it, i._pairsV[j].second);
+  for (size_t j = 0; j < i._pairsVec.size(); j++) {
+    std::vector<int>::iterator it = lower_bound(i._sortedVec.begin(), i._sortedVec.end(), i._pairsVec[j].second);
+    if (i._pairsVec[j].second)
+      i._sortedVec.insert(it, i._pairsVec[j].second);
   }
-  // printVector(i._sortedV); // debugging
+  // printVector(i._sortedVec); // debugging
 }
 
 void  PmergeMe::mergeInsertList(PmergeMe &i) {
@@ -97,33 +104,12 @@ void  PmergeMe::mergeInsertList(PmergeMe &i) {
 
   std::pair<int, int> pair;
   std::list<std::pair<int, int> > partitions;
-
-  for (size_t j = 0; j < i._v.size(); j += 2) {
-    if (j + 1 < i._v.size()) { // if there is a pair
-      pair = std::make_pair(std::min(i._v[j], i._v[j + 1]), std::max(i._v[j], i._v[j + 1]));
-    } else { // if not, second elem remains uninitialized
-      pair.first = i._v[j];
-      pair.second = '\0';
+  for (std::list<int>::const_iterator it = i._lst.begin(); it != i._lst.end(); it++) {
+      LOG("LIST");
+      LOG(*it);
     }
-    partitions.push_back(pair);
-  }
-  // printPairs(partitions); // debugging  
-
-  i._pairsV.reserve(partitions.size());
-  for (size_t j = 0; j < partitions.size(); j++) {
-    std::vector<std::pair<int, int> >::iterator it = lower_bound(i._pairsV.begin(), i._pairsV.end(), partitions[j]);
-    i._pairsV.insert(it, partitions[j]);
-  }
-
-  for (size_t j = 0; j < i._pairsV.size(); j++) {
-    i._sortedV.push_back(i._pairsV[j].first);
-  }
-
-  for (size_t j = 0; j < i._pairsV.size(); j++) {
-    std::vector<int>::iterator it = lower_bound(i._sortedV.begin(), i._sortedV.end(), i._pairsV[j].second);
-    if (i._pairsV[j].second)
-      i._sortedV.insert(it, i._pairsV[j].second);
-  }
+    // partitions.push_back(pair);
+  // printPairs(partitions); // debugging
 }
 
 // divide and conquer: the algorithm divides the input list into smaller sublists
@@ -139,19 +125,19 @@ void  PmergeMe::fordJohnsonSort(PmergeMe &i) {
   clock_t finishList = clock() - start;
 
   LOG("\033[1;43m VECTOR before: \033[0m");
-  printVector(i._v);
+  printVector(i._vec);
   LOG("\033[1;43m VECTOR after: \033[0m");
-  printVector(i._sortedV);
-  std::cout << "\033[1;42m Time to process a range of " << i._v.size() << " elements with std::vector : " << \
+  printVector(i._sortedVec);
+  std::cout << "\033[1;42m Time to process a range of " << i._vec.size() << " elements with std::vector : " << \
 		static_cast<float>(finishVector) / CLOCKS_PER_SEC * 1000 << " ms \033[0m" << std::endl;
 
   LOG("---------------------------------------------------------------------------")
 
   LOG("\033[1;43m LIST before: \033[0m");
-  printVector(i._l);
+  printList(i._lst);
   LOG("\033[1;43m LIST after: \033[0m");
-  printVector(i._sortedL);
-  std::cout << "\033[1;42m Time to process a range of " << i._l.size() << " elements with std::list : " << \
+  printList(i._sortedLst);
+  std::cout << "\033[1;42m Time to process a range of " << i._lst.size() << " elements with std::list : " << \
 		static_cast<float>(finishList) / CLOCKS_PER_SEC * 1000 << " ms \033[0m" << std::endl;
 }
 
@@ -162,15 +148,15 @@ void PmergeMe::mapData(char* argv[]) {
     try {
       if (PmergeMe::checkInput(*argv))
         throw InvalidInput();
-      instance._v.push_back(atoi(*argv));
-      instance._l.push_back(atoi(*argv));
+      instance._vec.push_back(atoi(*argv));
+      instance._lst.push_back(atoi(*argv));
       argv++;
     } catch (std::exception &e) {
       std::cerr << e.what() << std::endl;
       return;
     }
   }
-  // printList(instance._l); // debugging
-  // printVector(instance._v); // debugging
-  instance.fordJohnsonSort(instance);
+  // printList(instance._lst); // debugging
+  // printVector(instance._vec); // debugging
+  fordJohnsonSort(instance);
 }

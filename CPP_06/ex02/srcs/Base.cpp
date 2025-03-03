@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Base.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:00:46 by shinckel          #+#    #+#             */
-/*   Updated: 2025/02/11 18:43:01 by shinckel         ###   ########.fr       */
+/*   Updated: 2025/03/03 19:25:14 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,29 +37,27 @@ Base* generate() {
 }
 
 void identify(Base* p) {
-  if (dynamic_cast<A*>(p))
-    printBase("Dynamic cast reference: A");
-  else if (dynamic_cast<B*>(p))
-    printBase("Dynamic cast reference: B");
-  else if (dynamic_cast<C*>(p))
-    printBase("Dynamic cast reference: C");
-  else
-    printBase("Unknown type");
+  if (dynamic_cast<A*>(p)) {
+    LOG("Dynamic cast reference: A");
+  } else if (dynamic_cast<B*>(p)) {
+    LOG("Dynamic cast reference: B");
+  } else if (dynamic_cast<C*>(p)) {
+    LOG("Dynamic cast reference: C");
+  } else {
+    LOG("Unknown type");
+  }
 }
 
 void  identify(Base& p) {
-  if (pointerDynamicCast<A>(p)) 
-    printBase("Dynamic cast pointer: A");
-  else if (pointerDynamicCast<B>(p)) 
-    printBase("Dynamic cast pointer: B");
-  else if (pointerDynamicCast<C>(p)) 
-    printBase("Dynamic cast pointer: C");
-  else
-    printBase("Unknown type");
-}
-
-void  printBase(std::string str) {
-  std::cout << str << std::endl;
+  if (pointerDynamicCast<A>(p)) {
+    LOG("Dynamic cast pointer: A");
+  } else if (pointerDynamicCast<B>(p)) {
+    LOG("Dynamic cast pointer: B");
+  } else if (pointerDynamicCast<C>(p)) {
+    LOG("Dynamic cast pointer: C");
+  } else {
+    LOG("Unknown type");
+  }
 }
 
 // possible syntax, however not compatible to C++98
