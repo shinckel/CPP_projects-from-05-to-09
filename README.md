@@ -253,10 +253,6 @@ MERGE SORT — recursive algorithm, divide and conquer
 sorted array A    - sorted array of size n
 ```
 
-Merge sort - divide and conquer
-
-Recurrence solving
-
 ## Concepts
 
 | Task | Prototype | Description |

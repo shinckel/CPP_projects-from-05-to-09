@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 22:21:50 by shinckel          #+#    #+#             */
-/*   Updated: 2025/02/27 09:27:25 by shinckel         ###   ########.fr       */
+/*   Updated: 2025/03/03 12:11:29 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define HEADER "date | value"
 # define LOG(x) std::cout << x << std::endl;
 
-// container choise: std::map, it allows efficient key-based lookups
+// container choice: std::map, it allows efficient key-based lookups
 class BitcoinExchange {
   public:
     BitcoinExchange();
