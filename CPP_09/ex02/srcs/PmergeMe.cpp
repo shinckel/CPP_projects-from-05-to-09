@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shinckel <shinckel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:25:34 by shinckel          #+#    #+#             */
-/*   Updated: 2025/03/03 22:38:16 by shinckel         ###   ########.fr       */
+/*   Updated: 2025/03/04 18:26:38 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,17 +99,39 @@ void PmergeMe::mergeInsertVect(PmergeMe &i) {
   // printVector(i._sortedVec); // debugging
 }
 
-void  PmergeMe::mergeInsertList(PmergeMe &i) {
-  // check if already sorted
-
+void PmergeMe::mergeInsertList(PmergeMe &i) {
   std::pair<int, int> pair;
   std::list<std::pair<int, int> > partitions;
-  for (std::list<int>::const_iterator it = i._lst.begin(); it != i._lst.end(); it++) {
-      LOG("LIST");
-      LOG(*it);
-    }
-    // partitions.push_back(pair);
+  for (std::list<int>::const_iterator it = i._lst.begin(); it != i._lst.end(); std::advance(it, 2)) {
+      std::list<int>::const_iterator first = it;
+      std::list<int>::const_iterator second = it;
+      std::advance(second, 1);
+      if (second == i._lst.end()) {
+        pair.first = *first;
+        pair.second = '\0';
+        partitions.push_back(pair);
+        break;
+      } else {
+        pair = std::make_pair(std::min(*first, *second), std::max(*first, *second));
+      }
+      partitions.push_back(pair);
+  }
+
   // printPairs(partitions); // debugging
+  
+  for (std::list<std::pair<int, int> >::const_iterator it = partitions.begin(); it != partitions.end(); ++it) {
+    i._pairsLst.insert(lower_bound(i._pairsLst.begin(), i._pairsLst.end(), *it), *it);
+  }
+
+  for (std::list<std::pair<int, int> >::const_iterator it = i._pairsLst.begin(); it != i._pairsLst.end(); ++it) {
+    i._sortedLst.push_back(it->first);
+  }
+
+  for (std::list<std::pair<int, int> >::const_iterator it = i._pairsLst.begin(); it != i._pairsLst.end(); ++it) {
+    if (it->second) {
+      i._sortedLst.insert(lower_bound(i._sortedLst.begin(), i._sortedLst.end(), (*it).second), (*it).second);
+    }
+  }
 }
 
 // divide and conquer: the algorithm divides the input list into smaller sublists
