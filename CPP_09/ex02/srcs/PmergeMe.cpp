@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:25:34 by shinckel          #+#    #+#             */
-/*   Updated: 2025/03/04 18:26:38 by shinckel         ###   ########.fr       */
+/*   Updated: 2025/03/04 18:55:10 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,11 @@ bool PmergeMe::checkInput(const std::string& str) {
 // reserves space for the pairs that will be added to _pairsVec
 // so, vector does not need to reallocate memory as pairs are added, which can improve performance
 void PmergeMe::mergeInsertVect(PmergeMe &i) {
-  // check if already sorted
+  i._sortedVec.reserve(i._vec.size());
+  if (checkIfSorted(i._vec)) {
+    i._sortedVec = i._vec;
+    return ;
+  }
 
   std::pair<int, int> pair;
   std::vector<std::pair<int, int> > partitions;
@@ -100,6 +104,11 @@ void PmergeMe::mergeInsertVect(PmergeMe &i) {
 }
 
 void PmergeMe::mergeInsertList(PmergeMe &i) {
+  if (checkIfSorted(i._lst)) {
+    i._sortedLst = i._lst;
+    return ;
+  }
+
   std::pair<int, int> pair;
   std::list<std::pair<int, int> > partitions;
   for (std::list<int>::const_iterator it = i._lst.begin(); it != i._lst.end(); std::advance(it, 2)) {
