@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 10:59:39 by shinckel          #+#    #+#             */
-/*   Updated: 2025/01/09 16:55:26 by shinckel         ###   ########.fr       */
+/*   Updated: 2025/03/12 19:17:18 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,16 @@ void Span::addNumber(int n) {
   _sorted = false;
 }
 
+// I was generating random numbers before
+// however, it is hard for checking span, too repetitive
+// TODO: the new approach is already sorted. Please develop something more fun
 void Span::addPlethoraNumbers(void) {
-    srand(static_cast<int>(time(0))); // seed the random number generator
+    // srand(static_cast<int>(time(0))); // seed the random number generator
+    int i = 1;
     while (_container.size() < _maxSize) {
-        int random_number = rand() % 1000;
-        addNumber(random_number);
+        // int random_number = rand() % 1000;
+        addNumber(i * 2);
+        i++;
     }
 }
 

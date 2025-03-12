@@ -6,7 +6,7 @@
 /*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 10:53:41 by shinckel          #+#    #+#             */
-/*   Updated: 2025/01/08 22:16:35 by shinckel         ###   ########.fr       */
+/*   Updated: 2025/03/12 19:09:19 by shinckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int main(void) {
     std::cout << e.what() << std::endl;
   }
 
-  Span v3(1000);
+  Span v3(10000);
   v3.addPlethoraNumbers();
   v3.sortContainer();
   std::cout << "———————————————————————\n" << std::endl;
